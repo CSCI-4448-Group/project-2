@@ -20,7 +20,7 @@ public abstract class Music extends Item{
 class CD extends Music{
     CD(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String band, String album)
     {
-        super(name,purchPrice,listPrice,isNew,dayArriv,condition,salePrice,band,album);
+        super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString(){
         return "CD: " + get_band() + get_album();
