@@ -32,7 +32,7 @@ class Vinyl extends Music {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString() {
-        return "Vinyl: " + get_name();
+        return "Vinyl: " + get_band() + get_album();
     }
 }
 
@@ -41,6 +41,6 @@ class PaperScore extends Music {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString() {
-        return "PaperScore: " + get_name();
+        return "PaperScore: " + get_band() + get_album();
     }
 }
