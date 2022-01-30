@@ -11,7 +11,15 @@ abstract public class Item{
     private Date daySold_; //Default this value to current date in calander?
 
 
-
+    public abstract Item(String name, float purchPrice, float listPrice, float isNew, Date dayArriv, char condition, float salePrice){
+        name_ = name;
+        purchasePrice_=purchPrice;
+        listPrice_=listPrice;
+        new_ = isNew;
+        dayArrived_ = dayArriv;
+        condition_ = condition;
+        salePrice=salePrice_;
+    }
     public void set_name(String name){name_ = name;}
     public void set_purch_price(float price){purchasePrice_ = price;}
     public void set_list_price(float price){listPrice_ = price;}
