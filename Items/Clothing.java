@@ -24,6 +24,11 @@ class Hats extends Clothing
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         hatSize_ = hatSize;
     }
+
+    public int get_hat_size() {return hatSize_};
+
+    public void set_hat_size(int newHatSize) {hatSize_ = newHatSize};
+
     public String toString(){
         return "Hat: " + get_brand();
     }
@@ -49,6 +54,11 @@ class Shirts extends Clothing
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         shirtSize_ = shirtSize;
     }
+
+    public int get_shirt_size() {return shirtSize_};
+
+    public void set_shirt_size(int newShirtSize) {shirtSize_ = newShirtSize};
+
     public String toString(){
         return "Shirt: " + get_brand();
     }
