@@ -8,7 +8,7 @@ public abstract class Music extends Item{
     {
         super(name,purchPrice,listPrice,isNew,dayArriv,condition,salePrice);
         band_ = band;
-        album = album_;
+        album_ = album;
     }
     public void set_band(String band){band_ = band;}
     public void set_album(String album){album_ = album;}
