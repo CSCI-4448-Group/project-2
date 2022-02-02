@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Accessories extends Item
+public abstract class Accessories extends Item
 {
     private String brand_;
 
@@ -10,9 +10,9 @@ public class Accessories extends Item
         brand_ = brand;
     }
 
-    public String get_brand() {return brand_};
+    public String get_brand() {return brand_;}
 
-    public void set_brand(String newBrand) {brand_ = newBrand};
+    public void set_brand(String newBrand) {brand_ = newBrand;}
 }
 
 class PracticeAmps extends Accessories
@@ -25,13 +25,11 @@ class PracticeAmps extends Accessories
         wattage_ = wattage;
     }
 
-    public int get_wattage() {return wattage_};
+    public int get_wattage() {return wattage_;}
 
-    public void set_wattage(int newWattage) {wattage_ = newWattage};
+    public void set_wattage(int newWattage) {wattage_ = newWattage;}
 
-    public String toString(){
-        return "Practice Amp: " + get_brand();
-    }
+    public String toString(){return "Practice Amp: " + get_brand();}
 }
 
 class Cables extends Accessories
@@ -44,9 +42,9 @@ class Cables extends Accessories
         length_ = length;
     }
 
-    public int get_length() {return length_};
+    public int get_length() {return length_;}
 
-    public void set_length(int newLength) {length_ = newLength};
+    public void set_length(int newLength) {length_ = newLength;}
 
     public String toString(){
         return "Cable: " + get_brand();
@@ -57,15 +55,15 @@ class Strings extends Accessories
 {
     private String type_;
 
-    Strings(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, int type)
+    Strings(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, String type)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         type_ = type;
     }
 
-    public String get_type() {return type_};
+    public String get_type() {return type_;}
 
-    public void set_type(String newType) {type_ = newType};
+    public void set_type(String newType) {type_ = newType;}
 
     public String toString(){
         return "Strings: " + get_brand();
