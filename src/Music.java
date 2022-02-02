@@ -4,7 +4,7 @@ public abstract class Music extends Item{
     private String band_;
     private String album_;
 
-    Music(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String band, String album)
+    Music(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String band, String album)
     {
         super(name,purchPrice,listPrice,isNew,dayArriv,condition,salePrice);
         band_ = band;
@@ -18,7 +18,7 @@ public abstract class Music extends Item{
 }
 
 class CD extends Music{
-    CD(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String band, String album)
+    CD(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String band, String album)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
@@ -28,7 +28,7 @@ class CD extends Music{
 }
 
 class Vinyl extends Music {
-    Vinyl(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String band, String album) {
+    Vinyl(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String band, String album) {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString() {
@@ -37,7 +37,7 @@ class Vinyl extends Music {
 }
 
 class PaperScore extends Music {
-    PaperScore(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String band, String album) {
+    PaperScore(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String band, String album) {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString() {

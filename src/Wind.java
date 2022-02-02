@@ -1,6 +1,6 @@
-public class Wind extends Instrument
+public abstract class Wind extends Instrument
 {
-    Wind(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand)
+    Wind(String name, float purchPrice, float listPrice, boolean isNew, int dayArriv, char condition, float salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
@@ -10,7 +10,7 @@ class Flute extends Wind
 {
     private String type_;
 
-    Flute(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, String type)
+    Flute(String name, float purchPrice, float listPrice, boolean isNew, int dayArriv, char condition, float salePrice, String brand, String type)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         type_ = type;
@@ -29,7 +29,7 @@ class Harmonica extends Wind
 {
     private String key_;
 
-    Harmonica(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, String key)
+    Harmonica(String name, float purchPrice, float listPrice, boolean isNew, int dayArriv, char condition, float salePrice, String brand, String key)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         key_ = key;

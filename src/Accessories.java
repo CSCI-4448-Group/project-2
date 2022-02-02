@@ -1,10 +1,8 @@
-import java.util.Date;
-
 public abstract class Accessories extends Item
 {
     private String brand_;
 
-    Accessories(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand)
+    Accessories(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice);
         brand_ = brand;
@@ -19,7 +17,7 @@ class PracticeAmps extends Accessories
 {
     private int wattage_;
 
-    PracticeAmps(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, int wattage)
+    PracticeAmps(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, int wattage)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         wattage_ = wattage;
@@ -36,7 +34,7 @@ class Cables extends Accessories
 {
     private int length_;
 
-    Cables(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, int length)
+    Cables(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, int length)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         length_ = length;
@@ -55,7 +53,7 @@ class Strings extends Accessories
 {
     private String type_;
 
-    Strings(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, String type)
+    Strings(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, String type)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         type_ = type;

@@ -4,7 +4,7 @@ public abstract class Clothing extends Item
 {
     private String brand_;
 
-    Clothing(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand)
+    Clothing(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice);
         brand_ = brand;
@@ -19,7 +19,7 @@ class Hats extends Clothing
 {
     private int hatSize_;
 
-    Hats(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, int hatSize)
+    Hats(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, int hatSize)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         hatSize_ = hatSize;
@@ -36,7 +36,7 @@ class Hats extends Clothing
 
 class Bandanas extends Clothing
 {
-    Bandanas(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand)
+    Bandanas(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
@@ -49,7 +49,7 @@ class Shirts extends Clothing
 {
     private int shirtSize_;
 
-    Shirts(String name, float purchPrice, float listPrice, boolean isNew, Date dayArriv, char condition, float salePrice, String brand, int shirtSize)
+    Shirts(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, int shirtSize)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         shirtSize_ = shirtSize;
