@@ -32,4 +32,9 @@ public class Store{
     public ArrayList<Employee> get_employees() {return employees_;}
     public CashRegister get_register() {return register_;}
     public Calendar get_calendar() {return calendar_;}
+
+    public static void main(String args[])
+    {
+        System.out.println("Store");
+    }
 }
