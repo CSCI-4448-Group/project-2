@@ -11,6 +11,7 @@ public class Clerk extends Employee{
         if (currentAmount < 75.0)
         {
             go_to_bank(reg);
+            do_inventory();
         }
         else
         {
