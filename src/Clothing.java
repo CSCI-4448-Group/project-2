@@ -4,7 +4,7 @@ public abstract class Clothing extends Item
 {
     private String brand_;
 
-    Clothing(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
+    Clothing(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice);
         brand_ = brand;
@@ -15,11 +15,11 @@ public abstract class Clothing extends Item
     public void set_brand(String newBrand) {brand_ = newBrand;}
 }
 
-class Hats extends Clothing
+class Hat extends Clothing
 {
     private int hatSize_;
 
-    Hats(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, int hatSize)
+    Hat(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, int hatSize)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         hatSize_ = hatSize;
@@ -34,9 +34,9 @@ class Hats extends Clothing
     }
 }
 
-class Bandanas extends Clothing
+class Bandana extends Clothing
 {
-    Bandanas(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
+    Bandana(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
@@ -45,11 +45,11 @@ class Bandanas extends Clothing
     }
 }
 
-class Shirts extends Clothing
+class Shirt extends Clothing
 {
     private int shirtSize_;
 
-    Shirts(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, int shirtSize)
+    Shirt(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, int shirtSize)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         shirtSize_ = shirtSize;

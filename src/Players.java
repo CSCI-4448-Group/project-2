@@ -1,7 +1,7 @@
 public abstract class Players extends Item {
     private String brand_;
 
-    Players(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
+    Players(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice);
         brand_ = brand;
@@ -14,7 +14,7 @@ public abstract class Players extends Item {
 
 class CD_Player extends Players
 {
-    CD_Player(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
+    CD_Player(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
@@ -25,7 +25,7 @@ class CD_Player extends Players
 
 class RecordPlayer extends Players
 {
-    RecordPlayer(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
+    RecordPlayer(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
@@ -36,7 +36,7 @@ class RecordPlayer extends Players
 
 class MP3 extends Players
 {
-    MP3(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand)
+    MP3(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }

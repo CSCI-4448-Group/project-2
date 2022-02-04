@@ -2,7 +2,7 @@ public abstract class Stringed extends Instrument
 {
     private boolean electric_;
 
-    Stringed(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, boolean electric)
+    Stringed(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, boolean electric)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
         electric_ = electric;
@@ -11,7 +11,7 @@ public abstract class Stringed extends Instrument
 
 class Guitar extends Stringed
 {
-    Guitar(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, boolean electric)
+    Guitar(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, boolean electric)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand, electric);
     }
@@ -22,7 +22,7 @@ class Guitar extends Stringed
 
 class Bass extends Stringed
 {
-    Bass(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, boolean electric)
+    Bass(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, boolean electric)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand, electric);
     }
@@ -33,11 +33,11 @@ class Bass extends Stringed
 
 class Mandolin extends Stringed
 {
-    Mandolin(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String brand, boolean electric)
+    Mandolin(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, boolean electric)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand, electric);
     }
     public String toString(){
-        return "Mandolin: " + get_brand();
+        return new String("Mandolin: " + get_brand());
     }
 }
