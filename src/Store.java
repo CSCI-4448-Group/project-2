@@ -13,7 +13,6 @@ public class Store{
 
     public Store() {
         // Initialize everything based on the instructions
-
         //Initialize inventory. 3 of every bottom subclass, 51 items total
         add_to_inventory(new CD("Led Zepplin CD",5,10,true,0,new Condition("very good"),0,"Led Zepplin","Led Zepplin 4"));
         add_to_inventory(new CD("Post Malone CD",3,6,false,0,new Condition("poor"),0,"Post Malone","Stoney"));
@@ -71,7 +70,6 @@ public class Store{
 //        {
 //            super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
 //        }
-
     }
 
     public void day()
@@ -100,8 +98,11 @@ public class Store{
 
     public void add_to_inventory(Item item) {inventory_.add(item);}
     public void remove_from_inventory(Item item) {inventory_.remove(item);}
-    public void set_sold_items(ArrayList<Item> items) {soldItems_ = items;}
-    public void set_employees(ArrayList<Employee> employees) {employees_ = employees;}
+    public void add_to_sold(Item item) {soldItems_.add(item);}
+    public void remove_from_sold(Item item) {soldItems_.remove(item);} //Idk if we will actually ever need this
+    public void add_to_ordered(Item item) {orderedItems_.add(item);}
+    public void remove_from_ordered(Item item) {orderedItems_.remove(item);}
+    public void set_employees(ArrayList<Employee> employees) {employees_ = employees;} //Does this just create a copy or just assign a reference to the original
     public void set_register(CashRegister register) {register_ = register;}
     public void set_calendar(Calendar calendar) {calendar_ = calendar;}
     

@@ -16,12 +16,11 @@ class main_class {
         Store FNMS = new Store(); // Initialize store, change to proper constructor later
 
         // Main program loop
-
         for (int i = 0; i <= 30; i++)
         {
             FNMS.day();
             System.out.println();
-        }
+
         FNMS.simulationPrint();
     }
 }
