@@ -22,7 +22,7 @@ class main_class {
 
         // Main program loop
 
-        while (cal.get_current_date() < 30) {
+        while (cal.get_current_day() < 30) {
             int rand_num = rand.nextInt(2);
             Clerk current_clerk = null;
             if (rand_num == 0) {
