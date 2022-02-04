@@ -21,7 +21,7 @@ public class Store{
     }
 
     public void initialize(){
-        //3cds 3shirts 3 guitars
+        //Initialize inventory. 3 of every bottom subclass, 51 items total
         inventory_.add(new CD("Led Zepplin CD",5,10,true,0,new Condition("very good"),0,"Led Zepplin","Led Zepplin 4"));
         inventory_.add(new CD("Post Malone CD",3,6,false,0,new Condition("poor"),0,"Post Malone","Stoney"));
         inventory_.add(new CD("Metallica CD",10,20,true,0,new Condition("excellent"),0,"Metallica","Ride the Lightning"));
