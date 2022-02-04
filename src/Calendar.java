@@ -8,5 +8,6 @@ public class Calendar {
     }
 
     public int get_current_date() {return current_date_;}
+    public void set_current_date(int newDate) {current_date_ = newDate;}
     public int get_begin_date() {return begin_date_;}
 }

@@ -3,7 +3,12 @@ public class Clerk extends Employee{
     public Clerk(String name) {
         super(name);
     }
-    
+
+    public void ArriveAtStore()
+    {
+
+    }
+
     public void checkRegister(CashRegister reg) {
         double currentAmount = reg.get_amount();
         System.out.println("The amount of money in the cash register is currently: $" + currentAmount);
@@ -33,5 +38,7 @@ public class Clerk extends Employee{
 
     public void do_inventory() {} // Again, no way to access store yet, will return Item[] I think
     public void place_an_order(Item[] inventory, CashRegister reg) {}
+    public void open_the_store() {}
     public void clean_the_store() {}
+    public void leave_the_store() {}
 }
