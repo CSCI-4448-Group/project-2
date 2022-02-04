@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Store{
     private ArrayList<Item> inventory_;
     private ArrayList<Item> soldItems_;
+    private ArrayList<Item> orderedItems_;
     private ArrayList<Employee> employees_;
     private CashRegister register_;
     private Calendar calendar_;
@@ -12,6 +13,10 @@ public class Store{
     }
 
     //Initialize based on presed variables
+    //I dont think we should use this parm'd constructor. Using this implies that these lists
+    //will be initialized and passed through by some other thing, which would lead to coupling
+    //between the store and the thing passing the store its initialized lists.
+    //Imo, these lists should just be initialized in the store and not outside of it.
     public Store(ArrayList<Item> inventory, ArrayList<Item> soldItems, ArrayList<Employee> employees, CashRegister register, Calendar calendar) {
         inventory_ = inventory;
         soldItems_ = soldItems;
@@ -70,19 +75,15 @@ public class Store{
         inventory_.add(new Strings("Ernie Ball Strings",10,20,true,0,new Condition("excellent"),0,"Ernie Ball","9 gauge"));
         inventory_.add(new Strings("Dunlop Strings",10,20,true,0,new Condition("excellent"),0,"Dunlop","10 gauge"));
         inventory_.add(new Strings("Elixir Strings",10,20,true,0,new Condition("excellent"),0,"Elixir","11 gauge"));
-
-
-        //  CD(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, char condition, double salePrice, String band, String album)
-//        {
-//            super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
-//        }
-
     }
 
     public void add_to_inventory(Item item) {inventory_.add(item);}
     public void remove_from_inventory(Item item) {inventory_.remove(item);}
-    public void set_sold_items(ArrayList<Item> items) {soldItems_ = items;}
-    public void set_employees(ArrayList<Employee> employees) {employees_ = employees;}
+    public void add_to_sold(Item item) {soldItems_.add(item);}
+    public void remove_from_sold(Item item) {soldItems_.remove(item);} //Idk if we will actually ever need this
+    public void add_to_ordered(Item item) {orderedItems_.add(item);}
+    public void remove_from_ordered(Item item) {orderedItems_.remove(item);}
+    public void set_employees(ArrayList<Employee> employees) {employees_ = employees;} //Does this just create a copy or just assign a reference to the original
     public void set_register(CashRegister register) {register_ = register;}
     public void set_calendar(Calendar calendar) {calendar_ = calendar;}
     
@@ -91,9 +92,4 @@ public class Store{
     public ArrayList<Employee> get_employees() {return employees_;}
     public CashRegister get_register() {return register_;}
     public Calendar get_calendar() {return calendar_;}
-
-    public static void main(String args[])
-    {
-        System.out.println("Store");
-    }
 }
