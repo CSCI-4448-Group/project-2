@@ -9,7 +9,9 @@ public class Store{
     private Calendar calendar_;
 
     public Store() {
-        // Initialize everything based on the instructions
+        initializeItems();
+        initializeEmployees();
+        initializeCalendar();
     }
 
     //Initialize based on presed variables
@@ -24,8 +26,7 @@ public class Store{
         register_ = register;
         calendar_ = calendar;
     }
-
-    public void initialize(){
+    public void initializeItems(){
         //Initialize inventory. 3 of every bottom subclass, 51 items total
         inventory_.add(new CD("Led Zepplin CD",5,10,true,0,new Condition("very good"),0,"Led Zepplin","Led Zepplin 4"));
         inventory_.add(new CD("Post Malone CD",3,6,false,0,new Condition("poor"),0,"Post Malone","Stoney"));
@@ -76,6 +77,15 @@ public class Store{
         inventory_.add(new Strings("Dunlop Strings",10,20,true,0,new Condition("excellent"),0,"Dunlop","10 gauge"));
         inventory_.add(new Strings("Elixir Strings",10,20,true,0,new Condition("excellent"),0,"Elixir","11 gauge"));
     }
+    public void initializeEmployees(){
+        employees_.add(new Clerk("Shaggy"));
+        employees_.add(new Clerk("Velma"));
+    }
+    public void initializeCalendar(){
+        calendar_ = new Calendar();
+    }
+
+
 
     public void add_to_inventory(Item item) {inventory_.add(item);}
     public void remove_from_inventory(Item item) {inventory_.remove(item);}
