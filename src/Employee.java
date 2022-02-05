@@ -22,7 +22,7 @@ abstract class Employee extends Person{
 
     public void leave_the_store() {
         String employeeName = get_name();
-        System.out.println(employeeName + "is locking up and the FNMS is now closed.");
+        System.out.println(employeeName + " is locking up and the FNMS is now closed.");
     }
 
     public int get_days_worked() {return days_worked_;}
