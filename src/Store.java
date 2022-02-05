@@ -88,7 +88,8 @@ public class Store{
     public void set_calendar(Calendar calendar) {calendar_ = calendar;}
     
     public ArrayList<Item> get_inventory() {return inventory_;}
-    public ArrayList<Item> get_sold_itens() {return soldItems_;}
+    public ArrayList<Item> get_ordered() {return orderedItems_;}
+    public ArrayList<Item> get_sold_items() {return soldItems_;}
     public ArrayList<Employee> get_employees() {return employees_;}
     public CashRegister get_register() {return register_;}
     public Calendar get_calendar() {return calendar_;}
