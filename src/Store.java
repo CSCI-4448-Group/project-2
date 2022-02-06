@@ -137,4 +137,14 @@ public class Store {
     public Calendar get_calendar() {
         return calendar_;
     }
+
+    public static void main(String args[]) {
+        Store s = new Store();
+        Clerk e = (Clerk)s.get_employees().get(0);
+        ArrayList<Item> items = s.get_inventory().flatten_inventory();
+        System.out.println(items);
+        e.clean_store();
+        items = s.get_inventory().flatten_inventory();
+        System.out.println(items);
+    }
 }

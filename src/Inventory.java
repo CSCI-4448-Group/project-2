@@ -50,4 +50,11 @@ public class Inventory{
             inventory_.get(type).remove(item);
         }
     }
+
+    //Flatten the inventory_ hashMap into a list of all items currently in inventory
+    public ArrayList<Item> flatten_inventory(){
+        ArrayList<Item> items = new ArrayList<Item>();
+        inventory_.forEach((k,v)-> items.addAll(v));
+        return items;
+    }
 }

@@ -58,7 +58,7 @@ public class Clerk extends Employee{
     public void clean_store(){
         Random rand = new Random();
         String name = get_name();
-        Store s = get_store();
+        Inventory inv = get_store().get_inventory();
         double damage_chance = (name == "Shaggy") ? 20 : 5; //If its shaggy, its 20% damage chance, else 5% for velma
 
         //If the roll for a damaging an item fails, finish cleaning the store and return from fxn
@@ -66,19 +66,19 @@ public class Clerk extends Employee{
             System.out.println(name + " finished cleaning the store.");
             return;
         }
-//
-//        //Otherwise proceed with damaging an item
-//        Item damagedItem = s.get_inventory().get_mapping().values();//Get a random item from the stores inventory to damage
-//        if(damagedItem.get_condition().get_condition() == "poor"){ //If the item breaks
-//            System.out.println(name + " damaged " + damagedItem.toString() + " and broke it.");
-//            s.remove_from_inventory(damagedItem);
-//        }
-//        else{ //Reducde the items condition by one level, reduce the items listPrice by 20%
-//            System.out.println(name + " damaged " + damagedItem.toString() + " and its condition is now " + damagedItem.get_condition().get_condition());
-//            System.out.println("The price of the item will be reduced from " + damagedItem.get_list_price() + " to " + damagedItem.get_list_price() * .8);
-//            damagedItem.get_condition().decreaseCondition();
-//            damagedItem.set_list_price(damagedItem.get_list_price() * .2);
-//        }
-//        System.out.println(name + " finished cleaning the store.");
+
+        //Otherwise proceed with damaging an item
+        Item damagedItem = inv.flatten_inventory().get(rand.nextInt(inv.flatten_inventory().size()));//Flatten the inventory into a list of items and pick a random item to damage
+        if(damagedItem.get_condition().get_condition() == "poor"){ //If the item breaks
+            System.out.println(name + " damaged " + damagedItem.toString() + " and broke it.");
+            inv.remove_item(damagedItem);
+        }
+        else{ //Reducde the items condition by one level, reduce the items listPrice by 20%
+            System.out.println(name + " damaged " + damagedItem.toString() + " and its condition is now " + damagedItem.get_condition().get_condition());
+            System.out.println("The price of the item will be reduced from " + damagedItem.get_list_price() + " to " + damagedItem.get_list_price() * .8);
+            damagedItem.get_condition().decreaseCondition();
+            damagedItem.set_list_price(damagedItem.get_list_price() * .8);
+        }
+        System.out.println(name + " finished cleaning the store.");
     }
 }
