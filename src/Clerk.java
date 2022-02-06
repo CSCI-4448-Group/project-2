@@ -1,37 +1,87 @@
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 public class Clerk extends Employee{
-    
-    public Clerk(String name) {
-        super(name);
+
+    public Clerk(String name, Store s) {
+        super(name,s);
     }
-    
-    public void checkRegister(CashRegister reg) {
-        double currentAmount = reg.get_amount();
-        System.out.println("The amount of money in the cash register is currently: $" + currentAmount);
 
-        if (currentAmount < 75.0)
-        {
-            go_to_bank(reg);
-            do_inventory();
+    //Handle stocking available orderedItems_ in store into inventory_
+    public void arrive_at_store(){
+        Store s = get_store();
+        Integer currDay = s.get_calendar().get_current_day();
+        System.out.println(get_name() + " arrives at the store on Day " + currDay);
+        if(s.get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
+            s.get_inventory().put_items(s.get_ordered().get(currDay)); //Add all the items to the inventory
+            s.get_ordered().remove(currDay); //Remove items from orderedItems_
+        } //Maybe put the two above lines into their own private function
+    }
+
+    //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
+    public void check_register(){
+        double currentAmount = get_store().get_register().get_amount();
+        System.out.println(get_name() + " is checking the register\n" + "There is " + currentAmount);
+        if(currentAmount < 75) {
+            go_to_bank();
         }
-        else
-        {
-            do_inventory();
+    }
+
+    //Go to the bank, withdrawal 1000 dollars, add it to the register, tally the withdrawal (REMOVE MAGIC NUMBERS)
+    public void go_to_bank(){
+        CashRegister reg = get_store().get_register();
+        reg.set_amount(reg.get_amount() + 1000);
+        reg.set_bank_withdrawal(reg.get_bank_withdrawals() + 1000);
+        System.out.println(get_name() + " withdrew 1000 dollars from the bank and the new balance in the register is " + reg.get_amount() + " dollars");
+    }
+
+    //Scan the current inventory, if we have 0 count of any type of item, order 3 of them
+    public void do_inventory(){
+        Inventory inv = get_store().get_inventory();
+        for(Map.Entry<String, ArrayList<Item>> entry : inv.get_mapping().entrySet()){ //For each entry in our inventory map
+            if(entry.getValue().isEmpty()){ //If we have 0 count of any items
+                place_order(entry.getKey()); //Order that item
+            }
         }
-    } // {return register}? We don't have a way to access Store through Person yet
+        System.out.println("The sum of todays inventory is " + inv.get_purch_price_sum());
+    }
 
-    public void go_to_bank(CashRegister reg) {
-        double amountWithdrawn = 1000;
-        double currentBalance = reg.get_amount();
+    //Adds 3 items of type passed to orderedItems_ map in form of <Day Arriving, List Of Items>
+    public void place_order(String type){
+        System.out.println(get_name() + " placed an order for 3 " + type);
+        //ordereditems.put(currDay,ListOfItems)
+    }
 
-        reg.set_amount(currentBalance + amountWithdrawn);
-        double newAmount = reg.get_amount();
-        System.out.println("A bank withdrawal was made of $" + amountWithdrawn + " and the new balance in the register is $" + newAmount);
+    public void open_store(){
 
-        double currentBankWithdrawals = reg.get_bank_withdrawals();
-        reg.set_bank_withdrawal(currentBankWithdrawals + amountWithdrawn);
-    } // Need to track how much is taken out in the future
+    }
 
-    public void do_inventory() {} // Again, no way to access store yet, will return Item[] I think
-    public void place_an_order(Item[] inventory, CashRegister reg) {}
-    public void clean_the_store() {}
+    public void clean_store(){ //The size of this function needs to be reduced!
+        Random rand = new Random();
+        String name = get_name();
+        Inventory inv = get_store().get_inventory();
+        double damage_chance = (name == "Shaggy") ? 20 : 5; //If its shaggy, its 20% damage chance, else 5% for velma (friggin shaggy)
+        get_store().get_calendar().incr_current_day(); //Increment calendar day
+
+        //If the roll for a damaging an item fails, finish cleaning the store and return from fxn
+        if(rand.nextInt(100) > damage_chance) {
+            System.out.println(name + " finished cleaning the store.");
+            return;
+        }
+
+        //Otherwise proceed with damaging an item
+        Item damagedItem = inv.flatten_inventory().get(rand.nextInt(inv.flatten_inventory().size()));//Flatten the inventory into a list of items and pick a random item to damage
+        if(damagedItem.get_condition().get_condition() == "poor"){ //If the item breaks
+            System.out.println(name + " damaged " + damagedItem.toString() + " and broke it.");
+            inv.remove_item(damagedItem);
+        }
+        else{ //Reducde the items condition by one level, reduce the items listPrice by 20%
+            System.out.println(name + " damaged " + damagedItem.toString() + " and its condition is now " + damagedItem.get_condition().get_condition());
+            System.out.println("The price of the item will be reduced from " + damagedItem.get_list_price() + " to " + damagedItem.get_list_price() * .8);
+            damagedItem.get_condition().decreaseCondition();
+            damagedItem.set_list_price(damagedItem.get_list_price() * .8);
+        }
+        System.out.println(name + " finished cleaning the store.");
+    }
 }
