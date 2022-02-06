@@ -30,16 +30,23 @@ public class Inventory{
         return(inventory_.get(type));
     }
 
+    //Return the sum of pruchase price for all items in inventory
+    public int get_purch_price_sum(){
+        int sum = 0;
+        for(Item i : flatten_inventory()){
+            sum += i.get_purch_price();
+        }
+        return sum;
+    }
+
     //Add the item to its corresponding list based on type
     public void put_item(Item item){
         String type = item.toString().split(":")[0];
-        if(inventory_.containsKey(type)){
+        if(inventory_.containsKey(type)){ //If the Item type is already a key in the map
             inventory_.get(type).add(item);
         }
         else{
-            ArrayList<Item> newItems = new ArrayList<Item>();
-            newItems.add(item);
-            inventory_.put(type, newItems);
+            inventory_.put(type, new ArrayList<Item>(){{add(item);}}); //Else add a new entry into the map containing the new item
         }
     }
 

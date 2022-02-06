@@ -23,10 +23,10 @@ public class Clerk extends Employee{
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();
         System.out.println(get_name() + " is checking the register\n" + "There is " + currentAmount);
-        if(currentAmount >= 75) {
-            return;
+        if(currentAmount < 75) {
+            go_to_bank();
         }
-        go_to_bank();
+
     }
 
     //Go to the bank, withdrawal 1000 dollars, add it to the register, tally the withdrawal
@@ -37,25 +37,27 @@ public class Clerk extends Employee{
         System.out.println(get_name() + " withdrew 1000 dollars from the bank and the new balance in the register is " + reg.get_amount() + " dollars");
     }
 
+    //Scan the current inventory, if we have 0 count of any type of item, order 3 of them
     public void do_inventory(){
-        HashMap<String, ArrayList<Item>> inv = get_store().get_inventory().get_mapping();
-        for(Map.Entry<String, ArrayList<Item>> entry : inv.entrySet()){
-            System.out.println(entry.getKey() + "/" + entry.getValue());
+        Inventory inv = get_store().get_inventory();
+        for(Map.Entry<String, ArrayList<Item>> entry : inv.get_mapping().entrySet()){ //For each entry in our inventory map
+            if(entry.getValue().isEmpty()){ //If we have 0 count of any items
+                place_order(entry.getKey()); //Order that item
+            }
         }
+        System.out.println("The sum of todays inventory is " + inv.get_purch_price_sum());
     }
 
-    //If we do it this way, we will need to override clone method for each concrete class
-    //because we wont know what kind of object is being passed through here
-    //Also, this can be where we use polymorphism.
-    //Otherwise, we can have a long if-else chain of if(isInstanceOf[Type]) then...
-    public void place_order(Item item){
+
+    public void place_order(String type){
+        System.out.println(get_name() + " placed an order for 3 " + type);
     }
 
     public void open_store(){
 
     }
 
-    public void clean_store(){
+    public void clean_store(){ //The size of this function needs to be reduced!
         Random rand = new Random();
         String name = get_name();
         Inventory inv = get_store().get_inventory();
