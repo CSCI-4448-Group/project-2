@@ -26,7 +26,7 @@ public class Inventory{
     }
 
     //Return list of items of type in inventory
-    public ArrayList<Item> get_items(String type){
+    public ArrayList<Item> get_items_of_type(String type){
         return(inventory_.get(type));
     }
 
