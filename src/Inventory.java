@@ -39,15 +39,21 @@ public class Inventory{
         return sum;
     }
 
-    //Add the item to its corresponding list based on type
+    //Add the item to its corresponding map entry list
     public void put_item(Item item){
+        System.out.println("Adding item to inventory " + item.toString());
         String type = item.toString().split(":")[0];
         if(inventory_.containsKey(type)){ //If the Item type is already a key in the map
             inventory_.get(type).add(item);
         }
         else{
-            inventory_.put(type, new ArrayList<Item>(){{add(item);}}); //Else add a new entry into the map containing the new item
+            inventory_.put(type, new ArrayList<Item>(){{add(item);}}); //Else add a new entry into the map of the form (itemType, new list containing new item)
         }
+    }
+
+    //Add the items to their corresponding map entry list
+    public void put_items(ArrayList<Item> items){
+        items.forEach((item)->put_item(item));
     }
 
     //Remove item from list of items type

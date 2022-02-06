@@ -10,26 +10,25 @@ public class Clerk extends Employee{
 
     //Handle stocking available orderedItems_ in store into inventory_
     public void arrive_at_store(){
-        Store s = this.get_store();
-        System.out.println(this.get_name() + " arrives at the store on Day " + s.get_calendar().get_current_day());
-
-        //If there are no items to stock, end arrive_at_store
-        if(s.get_ordered().isEmpty()){
-            return;
-        }
+        Store s = get_store();
+        Integer currDay = s.get_calendar().get_current_day();
+        System.out.println(get_name() + " arrives at the store on Day " + currDay);
+        if(s.get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
+            s.get_inventory().put_items(s.get_ordered().get(currDay)); //Add all the items to the inventory
+            s.get_ordered().remove(currDay); //Remove items from orderedItems_
+        } //Maybe put the two above lines into their own private function
     }
 
-    //Check amount in register, go_to_bank if less than 75
+    //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();
         System.out.println(get_name() + " is checking the register\n" + "There is " + currentAmount);
         if(currentAmount < 75) {
             go_to_bank();
         }
-
     }
 
-    //Go to the bank, withdrawal 1000 dollars, add it to the register, tally the withdrawal
+    //Go to the bank, withdrawal 1000 dollars, add it to the register, tally the withdrawal (REMOVE MAGIC NUMBERS)
     public void go_to_bank(){
         CashRegister reg = get_store().get_register();
         reg.set_amount(reg.get_amount() + 1000);
@@ -48,9 +47,10 @@ public class Clerk extends Employee{
         System.out.println("The sum of todays inventory is " + inv.get_purch_price_sum());
     }
 
-
+    //Adds 3 items of type passed to orderedItems_ map in form of <Day Arriving, List Of Items>
     public void place_order(String type){
         System.out.println(get_name() + " placed an order for 3 " + type);
+        //ordereditems.put(currDay,ListOfItems)
     }
 
     public void open_store(){
@@ -61,7 +61,8 @@ public class Clerk extends Employee{
         Random rand = new Random();
         String name = get_name();
         Inventory inv = get_store().get_inventory();
-        double damage_chance = (name == "Shaggy") ? 20 : 5; //If its shaggy, its 20% damage chance, else 5% for velma
+        double damage_chance = (name == "Shaggy") ? 20 : 5; //If its shaggy, its 20% damage chance, else 5% for velma (friggin shaggy)
+        get_store().get_calendar().incr_current_day(); //Increment calendar day
 
         //If the roll for a damaging an item fails, finish cleaning the store and return from fxn
         if(rand.nextInt(100) > damage_chance) {

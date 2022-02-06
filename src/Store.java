@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Store {
     private Inventory inventory_;
     private ArrayList<Item> soldItems_;
-    private ArrayList<Item> orderedItems_;
+    private HashMap<Integer, ArrayList<Item>> orderedItems_; //map from (arrival day) -> (list of items arriving)
     private ArrayList<Employee> employees_;
     private CashRegister register_;
     private Calendar calendar_;
@@ -94,8 +94,8 @@ public class Store {
         soldItems_.remove(item);
     } //Idk if we will actually ever need this
 
-    public void add_to_ordered(Item item) {
-        orderedItems_.add(item);
+    public void add_to_ordered(Integer day, ArrayList<Item> items) {
+        orderedItems_.put(day,items);
     }
 
     public void remove_from_ordered(Item item) {
@@ -104,7 +104,7 @@ public class Store {
 
     public void set_employees(ArrayList<Employee> employees) {
         employees_ = employees;
-    } //Does this just create a copy or just assign a reference to the original
+    }
 
     public void set_register(CashRegister register) {
         register_ = register;
@@ -122,7 +122,7 @@ public class Store {
         return soldItems_;
     }
 
-    public ArrayList<Item> get_ordered() {
+    public HashMap<Integer, ArrayList<Item>> get_ordered() {
         return orderedItems_;
     }
 
