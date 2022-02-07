@@ -55,7 +55,7 @@ class main_class {
          }
 
          // get_purchase_price_sum gets the sum of all item values in inventory.
-         String inventoryValue = Integer.toString(fnms.get_inventory().get_purch_price_sum());
+         String inventoryValue = Double.toString(fnms.get_inventory().get_list_price_sum());
          System.out.println("The total value of inventory still in the store is: " + inventoryValue);
 
          // Sold items print items themselves with daySold and salePrice as well as total of salePrice

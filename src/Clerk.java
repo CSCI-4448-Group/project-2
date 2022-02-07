@@ -19,7 +19,6 @@ public class Clerk extends Employee{
 
     //Arrive at store and check if items need to be processed
     public void arrive_at_store(){
-        //get_store().get_calendar().set_current_day(get_store().get_calendar().get_current_day() + 1);
         int currDay = get_store().get_calendar().get_current_day();
         System.out.println(get_name() + " arrives at the store on Day " + currDay);
         if(get_store().get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
@@ -53,7 +52,7 @@ public class Clerk extends Employee{
                 place_order(entry.getKey()); //Order that item
             }
         }
-        System.out.println("The sum of todays inventory is " + inv.get_purch_price_sum());
+        System.out.println("The sum of todays inventory is " + inv.get_list_price_sum()); //Display the list price sum of all items in inventory
     }
 
     //Adds 3 items of type passed to orderedItems_ map in form of <Day Arriving, List Of Items>
@@ -98,10 +97,11 @@ public class Clerk extends Employee{
             inv.remove_item(damagedItem);
         }
         else{ //Reducde the items condition by one level, reduce the items listPrice by 20%
+            damagedItem.get_condition().decreaseCondition(); //Decrease the items condition
             System.out.println(name + " damaged " + damagedItem.toString() + " and its condition is now " + damagedItem.get_condition().get_condition());
             System.out.println("The price of the item will be reduced from " + damagedItem.get_list_price() + " to " + damagedItem.get_list_price() * .8);
-            damagedItem.get_condition().decreaseCondition();
             damagedItem.set_list_price(damagedItem.get_list_price() * .8);
+            System.out.println("The new price of the item is: " + damagedItem.get_list_price());
         }
         System.out.println(name + " finished cleaning the store.");
     }

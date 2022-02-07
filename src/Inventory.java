@@ -31,10 +31,19 @@ public class Inventory{
     }
 
     //Return the sum of pruchase price for all items in inventory
-    public int get_purch_price_sum(){
-        int sum = 0;
+    public double get_purch_price_sum(){
+        double sum = 0;
         for(Item i : flatten_inventory()){
             sum += i.get_purch_price();
+        }
+        return sum;
+    }
+
+    //Return the sum of the list price for all items in inventory
+    public double get_list_price_sum(){
+        double sum = 0;
+        for(Item i : flatten_inventory()){
+            sum += i.get_list_price();
         }
         return sum;
     }
