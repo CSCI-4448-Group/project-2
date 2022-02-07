@@ -69,6 +69,7 @@ public class Store {
         inventory_.put_item((new Strings("Ernie Ball Strings", 10, 20, true, 0, new Condition("excellent"), 0, "Ernie Ball", "9 gauge")));
         inventory_.put_item((new Strings("Dunlop Strings", 10, 20, true, 0, new Condition("excellent"), 0, "Dunlop", "10 gauge")));
         inventory_.put_item((new Strings("Elixir Strings", 10, 20, true, 0, new Condition("excellent"), 0, "Elixir", "11 gauge")));
+        System.out.println("");
     }
 
     public void initializeEmployees() {
