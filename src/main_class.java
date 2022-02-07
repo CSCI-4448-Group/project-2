@@ -89,7 +89,7 @@ class main_class {
         // Initialize store and two clerk objects
         Store FNMS = new Store(); 
         Clerk Shaggy = new Clerk("Shaggy", FNMS);
-        Clerk Velma = new Clerk("Vemla", FNMS);
+        Clerk Velma = new Clerk("Velma", FNMS);
 
         // Main program loop
         // Run loop for 30 days, calling begin_day each time, and print out a delineator between each day.
