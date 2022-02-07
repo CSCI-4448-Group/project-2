@@ -38,6 +38,7 @@ abstract public class Item{
     public double get_sale_price(){return salePrice_;}
     public int get_day_sold(){return daySold_;}
 
+    //Builds an item of type passed if there is template available in itemBuilder, throws exception if invalid type
     public static Item generate_item(String type) throws Exception {
         if (itemBuilder_.containsKey(type)) { //If the itemBuilder_ has a template for the desired item
             return itemBuilder_.get(type).call(); //Generate that item and return it
@@ -46,6 +47,7 @@ abstract public class Item{
         throw new IllegalArgumentException("generate_item attempted to generate invalid item");
     }
 
+    //Mapping from (item type) -> lambda function building an item of that type with random attributes
     private static HashMap<String, Callable<Item>> itemBuilder_ = new HashMap<String, Callable<Item>>() {{
         put("cd", () -> {
             Random rand = new Random();
