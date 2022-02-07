@@ -49,8 +49,69 @@ public class Clerk extends Employee{
 
     //Adds 3 items of type passed to orderedItems_ map in form of <Day Arriving, List Of Items>
     public void place_order(String type){
+        Store s = get_store();
+        ArrayList<Item> items = generate_items(type, numItems);
+        s.get_ordered().put(currDay,ListOfItems);
         System.out.println(get_name() + " placed an order for 3 " + type);
-        //ordereditems.put(currDay,ListOfItems)
+    }
+
+    private ArrayList<Item> generate_items(String type, int numItems){
+        switch(type.toLowerCase()){
+
+            case "cd":
+
+                break;
+
+            case "vinyl":
+
+                break;
+
+            case "paperscore":
+
+                break;
+            case "cdplayer":
+
+                break;
+
+            case "recordplayer":
+                break;
+
+
+            case "mp3player":
+
+                break;
+
+            case "guitar":
+
+                break;
+
+            case "bass":
+
+                break;
+
+            case "mandolin":
+
+                break;
+
+            case "flute":
+                break;
+
+            case "harmonica":
+
+                break;
+
+            case "practice amp":
+                break;
+
+            case "cable":
+                break;
+
+            case "strings":
+                break;
+
+            default:
+                throw new IllegalArgumentException("Error, invalid type passed to generate_items() fxn: " ,type);
+        }
     }
 
     public void open_store(){
