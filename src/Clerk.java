@@ -74,7 +74,29 @@ public class Clerk extends Employee{
     }
 
     public void open_store(){
-
+        //Generate buying customers
+        //Generate selling customers
+            //With random item
+        //buying customer:
+            //generate a type of item desired
+            //Check inv map for type of item
+            //If none exist, customer leaves
+            //If exist:
+                //50% chance to pay full price
+                //If fails, offer 10% discount
+                    //75% chance to accept
+            //If sold:
+                //move from inv to sold items, updating day sold and sale price
+            //Update cash register with money gained
+        //Selling customer:
+            //have clerk observe item and determine purchase price, new or used, condition
+                //Purchase price is based on condition, each level of condition has own price range
+            //Clerk offers customer determined purch price
+            //Customer has 50% chance to sell
+            //If customer refuses, clerk will add on 10% to purch price
+            //Customer has 75% chance to sell
+            //If customer accepts, item is added to inv, update register
+            //If customer denies, do nothing.
     }
 
     public void clean_store(){ //The size of this function needs to be reduced!
