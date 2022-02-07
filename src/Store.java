@@ -12,6 +12,9 @@ public class Store {
         initializeInventory();
         initializeEmployees();
         initializeCalendar();
+        initializeOrdered();
+        initializeRegister();
+        initializeSoldItems();
     }
 
     public void initializeInventory() {
@@ -77,6 +80,17 @@ public class Store {
         calendar_ = new Calendar();
     }
 
+    public void initializeOrdered() {
+        orderedItems_ = new HashMap<Integer, ArrayList<Item>>();
+    }
+
+    public void initializeRegister() {
+        register_ = new CashRegister();
+    }
+
+    public void initializeSoldItems() {
+        soldItems_ = new ArrayList<Item>();
+    }
 
     public void add_to_inventory(Item item) {
         inventory_.put_item((item));
