@@ -5,6 +5,8 @@ public class Store {
     private ArrayList<Item> soldItems_;
     private HashMap<Integer, ArrayList<Item>> orderedItems_; //map from (arrival day) -> (list of items arriving)
     private ArrayList<Employee> employees_;
+    private ArrayList<Customer> buyingCustomers_;
+    private ArrayList<Customer> sellingCustomers_;
     private CashRegister register_;
     private Calendar calendar_;
 

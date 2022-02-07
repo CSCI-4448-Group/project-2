@@ -1,9 +1,10 @@
 import java.util.HashMap;
+import java.util.Set;
 import java.util.ArrayList;
 
 public class Inventory{
     //Map from ItemType->List of items
-    private HashMap<String, ArrayList<Item>> inventory_;
+    private static HashMap<String, ArrayList<Item>> inventory_;
 
     Inventory(){
         initialize();
@@ -23,6 +24,12 @@ public class Inventory{
             return inventory_.get(type).size();
         }
         return 0;
+    }
+
+    public static ArrayList<String> get_item_types() {
+        ArrayList<String> mainList = new ArrayList<>();
+        mainList.addAll(inventory_.keySet());
+        return mainList;
     }
 
     //Return list of items of type in inventory
