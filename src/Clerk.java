@@ -54,13 +54,12 @@ public class Clerk extends Employee{
     }
 
     //Adds 3 items of type passed to orderedItems_ map in form of <Day Arriving, List Of Items>
-    public ArrayList<Item> place_order(String type) throws Exception{
+    public void place_order(String type) throws Exception{
         Random rand = new Random();
         Store s = get_store();
         ArrayList<Item> items = generate_items(type.toLowerCase(), 3); //Generate 3 of the type of items asked for
         s.get_ordered().put(s.get_calendar().get_current_day() + rand.nextInt(3) + 1 ,items); //map the ordered items from (day Arriving) -> (the items created)
         System.out.println(get_name() + " placed an order for 3 " + type);
-        return items;
     }
 
     //Generate numItems items of type provided, return generated ArrayList
