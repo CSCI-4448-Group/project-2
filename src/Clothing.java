@@ -41,7 +41,7 @@ class Bandana extends Clothing
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
     public String toString(){
-        return "Bandanas: " + get_brand();
+        return "Bandana: " + get_brand();
     }
 }
 

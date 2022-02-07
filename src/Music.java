@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public abstract class Music extends Item{
     private String band_;
     private String album_;

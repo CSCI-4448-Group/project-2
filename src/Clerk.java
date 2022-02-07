@@ -8,17 +8,23 @@ public class Clerk extends Employee{
         super(name,s);
     }
 
-    //Handle stocking available orderedItems_ in store into inventory_
+    //Arrive at store and check if items need to be processed
     public void arrive_at_store(){
-        Store s = get_store();
-        Integer currDay = s.get_calendar().get_current_day();
+        int currDay = get_store().get_calendar().get_current_day();
         System.out.println(get_name() + " arrives at the store on Day " + currDay);
-        if(s.get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
-            s.get_inventory().put_items(s.get_ordered().get(currDay)); //Add all the items to the inventory
-            s.get_ordered().remove(currDay); //Remove items from orderedItems_
-        } //Maybe put the two above lines into their own private function
+        if(get_store().get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
+            process_incoming_items(currDay);
+        }
     }
 
+    //Set all items arriving today to have currDay arrival date, add all items to inventory
+    private void process_incoming_items(int currDay){
+        Store s = get_store();
+        ArrayList<Item> incoming = s.get_ordered().get(currDay); //Get all the items from the map
+        incoming.forEach((item)->item.set_day_arrived(currDay));  //Set all their arrival dates to current day
+        s.get_inventory().put_items(incoming); //Add all the items to the inventory
+        s.get_ordered().remove(currDay); //Remove items from orderedItems_
+    }
     //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();
@@ -37,7 +43,7 @@ public class Clerk extends Employee{
     }
 
     //Scan the current inventory, if we have 0 count of any type of item, order 3 of them
-    public void do_inventory(){
+    public void do_inventory() throws Exception{
         Inventory inv = get_store().get_inventory();
         for(Map.Entry<String, ArrayList<Item>> entry : inv.get_mapping().entrySet()){ //For each entry in our inventory map
             if(entry.getValue().isEmpty()){ //If we have 0 count of any items
@@ -48,70 +54,22 @@ public class Clerk extends Employee{
     }
 
     //Adds 3 items of type passed to orderedItems_ map in form of <Day Arriving, List Of Items>
-    public void place_order(String type){
+    public ArrayList<Item> place_order(String type) throws Exception{
+        Random rand = new Random();
         Store s = get_store();
-        ArrayList<Item> items = generate_items(type, numItems);
-        s.get_ordered().put(currDay,ListOfItems);
+        ArrayList<Item> items = generate_items(type.toLowerCase(), 3); //Generate 3 of the type of items asked for
+        s.get_ordered().put(s.get_calendar().get_current_day() + rand.nextInt(3) + 1 ,items); //map the ordered items from (day Arriving) -> (the items created)
         System.out.println(get_name() + " placed an order for 3 " + type);
+        return items;
     }
 
-    private ArrayList<Item> generate_items(String type, int numItems){
-        switch(type.toLowerCase()){
-
-            case "cd":
-
-                break;
-
-            case "vinyl":
-
-                break;
-
-            case "paperscore":
-
-                break;
-            case "cdplayer":
-
-                break;
-
-            case "recordplayer":
-                break;
-
-
-            case "mp3player":
-
-                break;
-
-            case "guitar":
-
-                break;
-
-            case "bass":
-
-                break;
-
-            case "mandolin":
-
-                break;
-
-            case "flute":
-                break;
-
-            case "harmonica":
-
-                break;
-
-            case "practice amp":
-                break;
-
-            case "cable":
-                break;
-
-            case "strings":
-                break;
-
-            default:
-                throw new IllegalArgumentException("Error, invalid type passed to generate_items() fxn: " ,type);
+    //Generate numItems items of type provided, return generated ArrayList
+    private ArrayList<Item> generate_items(String type, int numItems) throws Exception{
+        ArrayList<Item> items = new ArrayList<Item>();
+        for(int i = 0; i < numItems; i++){ //For the number of items we need
+            items.add(Item.generate_item(type)); //Call the item generator for the type of item we need
         }
+        return items;
     }
 
     public void open_store(){
@@ -123,7 +81,7 @@ public class Clerk extends Employee{
         String name = get_name();
         Inventory inv = get_store().get_inventory();
         double damage_chance = (name == "Shaggy") ? 20 : 5; //If its shaggy, its 20% damage chance, else 5% for velma (friggin shaggy)
-        get_store().get_calendar().incr_current_day(); //Increment calendar day
+         //Increment calendar day
 
         //If the roll for a damaging an item fails, finish cleaning the store and return from fxn
         if(rand.nextInt(100) > damage_chance) {
@@ -144,5 +102,11 @@ public class Clerk extends Employee{
             damagedItem.set_list_price(damagedItem.get_list_price() * .8);
         }
         System.out.println(name + " finished cleaning the store.");
+    }
+
+    public void leave_store(){
+        get_store().get_calendar().incr_current_day();
+        incr_days_worked();
+        System.out.println(get_name() + " locked up the store and went home for the day");
     }
 }
