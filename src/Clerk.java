@@ -8,15 +8,6 @@ public class Clerk extends Employee{
         super(name,s);
     }
 
-    //Arrive at store and check if items need to be processed
-    public void arrive_at_store(){
-        int currDay = get_store().get_calendar().get_current_day();
-        System.out.println(get_name() + " arrives at the store on Day " + currDay);
-        if(get_store().get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
-            process_incoming_items(currDay);
-        }
-    }
-
     //Set all items arriving today to have currDay arrival date, add all items to inventory
     private void process_incoming_items(int currDay){
         Store s = get_store();
@@ -25,6 +16,18 @@ public class Clerk extends Employee{
         s.get_inventory().put_items(incoming); //Add all the items to the inventory
         s.get_ordered().remove(currDay); //Remove items from orderedItems_
     }
+
+    //Arrive at store and check if items need to be processed
+    public void arrive_at_store(){
+        //get_store().get_calendar().set_current_day(get_store().get_calendar().get_current_day() + 1);
+        int currDay = get_store().get_calendar().get_current_day();
+        System.out.println(get_name() + " arrives at the store on Day " + currDay);
+        if(get_store().get_ordered().containsKey(currDay)){ //If there are ordered items that arrive today
+            process_incoming_items(currDay);
+        }
+    }
+
+
     //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();

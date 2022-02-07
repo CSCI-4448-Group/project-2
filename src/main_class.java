@@ -5,7 +5,7 @@ import java.io.PrintStream;
 
 class main_class {
 
-    public static void begin_day(Store fnms, Clerk clerk1, Clerk clerk2)
+    public static void begin_day(Store fnms, Clerk clerk1, Clerk clerk2) throws Exception
     {
         // Choose a random number (either 0 or 1) and assign the respective clerk to work for that day.
         Random rand = new Random();
@@ -33,7 +33,7 @@ class main_class {
         current_clerk.clean_store();
 
         // Clerk announces he leaves the store
-        //current_clerk.leave_store();
+        current_clerk.leave_store();
     }
 
     // Possible way to handle announcements, may make it easier?
@@ -85,7 +85,7 @@ class main_class {
          System.out.println("$" + Double.toString(fnms.get_register().get_bank_withdrawals()));
      }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Initialize store and two clerk objects
         Store FNMS = new Store(); 
         Clerk Shaggy = new Clerk("Shaggy", FNMS);
@@ -95,6 +95,7 @@ class main_class {
         // Run loop for 30 days, calling begin_day each time, and print out a delineator between each day.
         for (int i = 0; i < 30; i ++)
         {
+            System.out.println("===========================================");
             begin_day(FNMS, Shaggy, Velma);
             System.out.println("===========================================");
             System.out.println("\n");
