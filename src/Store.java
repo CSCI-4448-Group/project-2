@@ -136,7 +136,7 @@ public class Store {
         return inventory_;
     }
 
-    public ArrayList<Item> get_sold_itens() {
+    public ArrayList<Item> get_sold_items() {
         return soldItems_;
     }
 

@@ -108,7 +108,7 @@ public class Clerk extends Employee{
 
         // Get the inventory, soldItems, cash register of the store to modify
         Inventory inv = get_store().get_inventory();
-        ArrayList<Item> soldItems = get_store().get_sold_itens();
+        ArrayList<Item> soldItems = get_store().get_sold_items();
         CashRegister reg = get_store().get_register();
 
         //Generate buying customers
