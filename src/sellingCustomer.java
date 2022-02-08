@@ -3,8 +3,8 @@ import java.util.Random;
 import java.util.Set;
 
 public class sellingCustomer extends Person {
-    // private Set<String> Item_types;
-    
+
+    private Item sellingItem_;
 
     // Initialize Selling Customer
     public sellingCustomer (String name, Item item) throws Exception {
@@ -21,13 +21,10 @@ public class sellingCustomer extends Person {
         String type = item_types.get(rand.nextInt(item_types.size()));
 
         // Generates a random item of the type
-        Item selling_item = Item.generate_item(type);
-
-
-
+        sellingItem_ = Item.generate_item(type);
     }
 
 
-
-    // public Item get_item() {return item_;}
+    //Returns item customer wants to sell
+    public Item get_item() {return sellingItem_;}
 }
