@@ -35,7 +35,7 @@ public class Clerk extends Employee{
     //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();
-        System.out.println(get_name() + " is checking the register\n" + "There is " + currentAmount);
+        System.out.println(get_name() + " is checking the register and there is " + currentAmount);
         if(currentAmount < 75) {
             go_to_bank();
         }
@@ -115,7 +115,7 @@ public class Clerk extends Employee{
         ArrayList<buyingCustomer> buyCustomers = generateBuyingCustomers();
 
         //Generate selling customers With random item
-        ArrayList<sellingCustomer> sellCustomers = generateSellingCustomers();
+        //ArrayList<sellingCustomer> sellCustomers = generateSellingCustomers();
 
         //buying customer:
         for (int i = 0; i < buyCustomers.size(); i++) {

@@ -63,7 +63,7 @@ class main_class {
          // Sold items print items themselves with daySold and salePrice as well as total of salePrice
          // get_sold_items returns an arrayList of items sold
          System.out.println("Sold items from the store: ");
-         ArrayList<Item> finalSold = fnms.get_sold_itens();
+         ArrayList<Item> finalSold = fnms.get_sold_items();
          System.out.println("\n");
 
          // Declare a tracker which maintains the total count of our sold item prices.
