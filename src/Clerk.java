@@ -173,7 +173,7 @@ public class Clerk extends Employee{
         for (int i = 0; i < sellCustomers.size(); i++)
         {
             // Get the item from the selling customer
-            Item sellingItem = sellCustomers.get(i).get_item()
+            Item sellingItem = sellCustomers.get(i).get_item();
 
             //have clerk observe item and determine purchase price, new or used, condition
 
@@ -200,7 +200,7 @@ public class Clerk extends Employee{
                 if (sellAtSeventyFivePercent) {
                     reg.set_amount(reg.get_amount() + sellingItem.get_sale_price());
 
-                    System.out.println(get_name() + " bought a " + sellingItem.get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + sellingItem.get_sale_price() " after a 10% offer increase.");
+                    System.out.println(get_name() + " bought a " + sellingItem.get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + sellingItem.get_sale_price() + " after a 10% offer increase.");
 
                     get_store().add_to_inventory(sellingItem);
                     sellCustomers.remove(i);
