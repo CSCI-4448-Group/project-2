@@ -1,8 +1,5 @@
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.PrintStream;
-
 class main_class {
 
     public static void begin_day(Store fnms, Clerk clerk1, Clerk clerk2) throws Exception

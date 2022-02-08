@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.HashMap;
 import java.util.Map;
 public class Clerk extends Employee{
 
@@ -79,10 +78,10 @@ public class Clerk extends Employee{
     }
 
     private ArrayList<buyingCustomer> generateBuyingCustomers(){
-        Random rand = new Random();
         ArrayList<buyingCustomer> buyCustomers = new ArrayList<buyingCustomer>();
 
-        int randBuyers = getRandomNumber(4, 10);
+        // getRandomNumber is exclusive to the maximum so this returns a number between [4, 10] inclusive.
+        int randBuyers = getRandomNumber(4, 11); 
 
         for (int i = 1; i < randBuyers + 1; i++)
         {
@@ -94,9 +93,10 @@ public class Clerk extends Employee{
     private ArrayList<sellingCustomer> generateSellingCustomers() throws Exception{
         ArrayList<sellingCustomer> sellCustomers = new ArrayList<sellingCustomer>();
 
-        int randSellers = getRandomNumber(1, 4);
+        // getRandomNumber is exclusive to the maximum so this returns a number between [1, 4] inclusive.
+        int randSellers = getRandomNumber(1, 5);
 
-        for (int i = 1; i < randSellers; i++)
+        for (int i = 1; i < randSellers + 1; i++)
         {
             sellCustomers.add(new sellingCustomer("Selling Customer " + i));
         }
@@ -108,7 +108,6 @@ public class Clerk extends Employee{
 
         // Get the inventory, soldItems, cash register of the store to modify
         Inventory inv = get_store().get_inventory();
-        ArrayList<Item> soldItems = get_store().get_sold_items();
         CashRegister reg = get_store().get_register();
 
         //Generate buying customers
@@ -126,7 +125,6 @@ public class Clerk extends Employee{
 //            //If none exist, customer leaves
             if (potentialItems.size() == 0) {
                 System.out.println(buyCustomers.get(i).get_name() + " wanted to buy a " + buyType + " but none were in inventory, so they left.");
-                buyCustomers.remove(i);
             }
             //If exist:
             else {
@@ -142,11 +140,10 @@ public class Clerk extends Employee{
                     toBuyItem.set_sale_price(toBuyItem.get_list_price());
                     reg.set_amount(reg.get_amount() + toBuyItem.get_sale_price());
 
-                    System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for " + toBuyItem.get_sale_price());
+                    System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for $" + toBuyItem.get_sale_price());
 
                     get_store().remove_from_inventory(toBuyItem);
                     get_store().add_to_sold(toBuyItem);
-                    buyCustomers.remove(i);
                 }
                 //If fails, offer 10% discount
                 else {
@@ -160,11 +157,13 @@ public class Clerk extends Employee{
                         toBuyItem.set_sale_price(toBuyItem.get_list_price());
                         reg.set_amount(reg.get_amount() + toBuyItem.get_sale_price());
 
-                        System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for " + toBuyItem.get_sale_price() + " after a 10% discount.");
+                        System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for $" + toBuyItem.get_sale_price() + " after a 10% discount.");
 
                         get_store().remove_from_inventory(toBuyItem);
                         get_store().add_to_sold(toBuyItem);
-                        buyCustomers.remove(i);
+                    }
+                    else {
+                        System.out.println(get_name() + " tried selling a " + toBuyItem.get_condition().get_condition() + " condition " + toBuyItem.get_new_or_used() + " " + toBuyItem.get_name() + " to " + buyCustomers.get(i).get_name() + " for $" + toBuyItem.get_list_price() + " but customer refused.");
                     }
                 }
             }
@@ -185,7 +184,7 @@ public class Clerk extends Employee{
 //
             if (sellAtFiftyPercent) {
                 reg.set_amount(reg.get_amount() - purchPrice); //Subtract amount from register
-                System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice);
+                System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_new_or_used() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for $" + purchPrice);
                 sellingItem.set_purch_price(purchPrice); //Set the purchase price of item
                 get_store().add_to_inventory(sellingItem); //Add to inventory
             }
@@ -197,11 +196,11 @@ public class Clerk extends Employee{
                 if (sellAtSeventyFivePercent) {
                     reg.set_amount(reg.get_amount() - purchPrice); //Subtract amt from register
                     sellingItem.set_purch_price(purchPrice); //Set the purchase price of item
-                    System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " after a 10% offer increase.");
+                    System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_new_or_used() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for $" + purchPrice + " after a 10% offer increase.");
                     get_store().add_to_inventory(sellingItem); //Add new item to inventory
                 }
                 else {
-                    System.out.println(get_name() + " tried buying a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " but customer refused.");
+                    System.out.println(get_name() + " tried buying a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_new_or_used() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for $" + purchPrice + " but customer refused.");
                 }
             }
         }
