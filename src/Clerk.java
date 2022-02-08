@@ -35,7 +35,7 @@ public class Clerk extends Employee{
     //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();
-        System.out.println(get_name() + " is checking the register\n" + "There is " + currentAmount);
+        System.out.println(get_name() + " is checking the register and there is " + currentAmount);
         if(currentAmount < 75) {
             go_to_bank();
         }
@@ -108,7 +108,7 @@ public class Clerk extends Employee{
 
         // Get the inventory, soldItems, cash register of the store to modify
         Inventory inv = get_store().get_inventory();
-        ArrayList<Item> soldItems = get_store().get_sold_itens();
+        ArrayList<Item> soldItems = get_store().get_sold_items();
         CashRegister reg = get_store().get_register();
 
         //Generate buying customers
@@ -170,14 +170,47 @@ public class Clerk extends Employee{
             }
         }
         //Selling customer:
+        for (int i = 0; i < sellCustomers.size(); i++)
+        {
+            // Get the item from the selling customer
+            Item sellingItem = sellCustomers.get(i).get_item()
+
             //have clerk observe item and determine purchase price, new or used, condition
+
                 //Purchase price is based on condition, each level of condition has own price range
             //Clerk offers customer determined purch price
             //Customer has 50% chance to sell
+            //50% chance to pay full price
+            Boolean sellAtFiftyPercent = sellCustomers.get(i).haggle_roll(50);
+
+            if (sellAtFiftyPercent) {
+                reg.set_amount(reg.get_amount() + sellingItem.get_sale_price());
+
+                System.out.println(get_name() + " bought a " + sellingItem.get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + sellingItem.get_sale_price());
+
+                get_store().add_to_inventory(sellingItem);
+                sellCustomers.remove(i);
+            }
+            //If fails, offer 10% discount
+            else {
+                sellingItem.set_list_price(1.1 * toBuyItem.get_list_price());
+
+                //75% chance to accept
+                Boolean sellAtSeventyFivePercent = sellCustomers.get(i).haggle_roll(75);
+                if (sellAtSeventyFivePercent) {
+                    reg.set_amount(reg.get_amount() + sellingItem.get_sale_price());
+
+                    System.out.println(get_name() + " bought a " + sellingItem.get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + sellingItem.get_sale_price() " after a 10% offer increase.");
+
+                    get_store().add_to_inventory(sellingItem);
+                    sellCustomers.remove(i);
+                }
+            }
             //If customer refuses, clerk will add on 10% to purch price
             //Customer has 75% chance to sell
             //If customer accepts, item is added to inv, update register
             //If customer denies, do nothing.
+        }
     }
 
     public void clean_store(){ //The size of this function needs to be reduced!
