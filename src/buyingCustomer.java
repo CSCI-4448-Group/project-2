@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.ArrayList;
-public class buyingCustomer extends Person {
+
+public class buyingCustomer extends Customer {
 
     private String wantedType_;
 

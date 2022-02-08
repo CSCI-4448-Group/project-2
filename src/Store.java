@@ -136,7 +136,7 @@ public class Store {
         return inventory_;
     }
 
-    public ArrayList<Item> get_sold_itens() {
+    public ArrayList<Item> get_sold_items() {
         return soldItems_;
     }
 
@@ -146,6 +146,16 @@ public class Store {
 
     public ArrayList<Employee> get_employees() {
         return employees_;
+    }
+
+    public ArrayList<Clerk> get_clerks() {
+        ArrayList<Clerk> clerks = new ArrayList<Clerk>();
+        for(Employee emp : employees_){
+            if(emp instanceof Clerk){
+                clerks.add((Clerk)emp);
+            }
+        }
+        return clerks;
     }
 
     public CashRegister get_register() {

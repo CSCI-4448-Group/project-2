@@ -40,6 +40,7 @@ abstract public class Item{
 
     //Builds an item of type passed if there is template available in itemBuilder, throws exception if invalid type
     public static Item generate_item(String type) throws Exception {
+        type = type.toLowerCase();
         if (itemBuilder_.containsKey(type)) { //If the itemBuilder_ has a template for the desired item
             return itemBuilder_.get(type).call(); //Generate that item and return it
         }
@@ -76,7 +77,7 @@ abstract public class Item{
             return new PaperScore(name + " Paperscore",purchPrice,purchPrice*2,rand.nextBoolean(),
                     -1,new Condition("good"),0,name,albums[rand.nextInt(albums.length)]);
         });
-        put("practiceamp", () -> {
+        put("practice amp", () -> {
             Random rand = new Random();
             String[] brands = {"Roland", "Bugera", "Laney", "Line 6"};
             String name = brands[rand.nextInt(brands.length)];

@@ -8,6 +8,11 @@ public class Clerk extends Employee{
         super(name,s);
     }
 
+    public int getRandomNumber(int min, int max) //https://www.baeldung.com/java-generating-random-numbers-in-range
+    {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
     //Set all items arriving today to have currDay arrival date, add all items to inventory
     private void process_incoming_items(int currDay){
         Store s = get_store();
@@ -30,7 +35,7 @@ public class Clerk extends Employee{
     //Check amount in register, go_to_bank if less than 75 (REMOVE MAGIC NUMBERS)
     public void check_register(){
         double currentAmount = get_store().get_register().get_amount();
-        System.out.println(get_name() + " is checking the register\n" + "There is " + currentAmount);
+        System.out.println(get_name() + " is checking the register and there is " + currentAmount);
         if(currentAmount < 75) {
             go_to_bank();
         }
@@ -73,30 +78,158 @@ public class Clerk extends Employee{
         return items;
     }
 
-    public void open_store(){
+    private ArrayList<buyingCustomer> generateBuyingCustomers(){
+        Random rand = new Random();
+        ArrayList<buyingCustomer> buyCustomers = new ArrayList<buyingCustomer>();
+
+        int randBuyers = getRandomNumber(4, 10);
+
+        for (int i = 1; i < randBuyers + 1; i++)
+        {
+            buyCustomers.add(new buyingCustomer("Buying Customer " + i));
+        }
+        return buyCustomers;
+    }
+
+    private ArrayList<sellingCustomer> generateSellingCustomers() throws Exception{
+        ArrayList<sellingCustomer> sellCustomers = new ArrayList<sellingCustomer>();
+
+        int randSellers = getRandomNumber(1, 4);
+
+        for (int i = 1; i < randSellers; i++)
+        {
+            sellCustomers.add(new sellingCustomer("Selling Customer " + i));
+        }
+        return sellCustomers;
+    }
+
+    public void open_store() throws Exception{
+        System.out.println(get_name() + " opened the FNMS for business.");
+
+        // Get the inventory, soldItems, cash register of the store to modify
+        Inventory inv = get_store().get_inventory();
+        ArrayList<Item> soldItems = get_store().get_sold_items();
+        CashRegister reg = get_store().get_register();
+
         //Generate buying customers
-        //Generate selling customers
-            //With random item
-        //buying customer:
-            //generate a type of item desired
-            //Check inv map for type of item
-            //If none exist, customer leaves
+        ArrayList<buyingCustomer> buyCustomers = generateBuyingCustomers();
+
+        //Generate selling customers With random item
+        ArrayList<sellingCustomer> sellCustomers = generateSellingCustomers();
+
+//        //buying customer:
+        for (int i = 0; i < buyCustomers.size(); i++) {
+//            //generate a type of item desired
+            String buyType = buyCustomers.get(i).get_wanted_type();
+//            //Check inv map for type of item
+            ArrayList<Item> potentialItems = inv.get_items_of_type(buyType);
+//            //If none exist, customer leaves
+            if (potentialItems.size() == 0) {
+                System.out.println(buyCustomers.get(i).get_name() + " wanted to buy a " + buyType + " but none were in inventory, so they left.");
+                buyCustomers.remove(i);
+            }
             //If exist:
+            else {
+                // Just get the first item of the type. Could change this later
+                Item toBuyItem = potentialItems.get(0);
+
                 //50% chance to pay full price
+                Boolean buyAtFiftyPercent = buyCustomers.get(i).haggle_roll(50);
+
+                if (buyAtFiftyPercent) {
+                    // Remove the bought item from inventory, set daySold and salePrice, update cash register with sale price, move item to soldItems, remove the customer
+                    toBuyItem.set_day_sold(get_store().get_calendar().get_current_day());
+                    toBuyItem.set_sale_price(toBuyItem.get_list_price());
+                    reg.set_amount(reg.get_amount() + toBuyItem.get_sale_price());
+
+                    System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for " + toBuyItem.get_sale_price());
+
+                    get_store().remove_from_inventory(toBuyItem);
+                    get_store().add_to_sold(toBuyItem);
+                    buyCustomers.remove(i);
+                }
                 //If fails, offer 10% discount
+                else {
+                    toBuyItem.set_list_price(0.90 * toBuyItem.get_list_price());
+
                     //75% chance to accept
-            //If sold:
-                //move from inv to sold items, updating day sold and sale price
-            //Update cash register with money gained
+                    Boolean buyAtSeventyFivePercent = buyCustomers.get(i).haggle_roll(75);
+                    if (buyAtSeventyFivePercent) {
+                        // Remove the bought item from inventory, set daySold and salePrice, update cash register with sale price, move item to soldItems, remove the customer
+                        toBuyItem.set_day_sold(get_store().get_calendar().get_current_day());
+                        toBuyItem.set_sale_price(toBuyItem.get_list_price());
+                        reg.set_amount(reg.get_amount() + toBuyItem.get_sale_price());
+
+                        System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for " + toBuyItem.get_sale_price() + " after a 10% discount.");
+
+                        get_store().remove_from_inventory(toBuyItem);
+                        get_store().add_to_sold(toBuyItem);
+                        buyCustomers.remove(i);
+                    }
+                }
+            }
+        }
+
         //Selling customer:
-            //have clerk observe item and determine purchase price, new or used, condition
-                //Purchase price is based on condition, each level of condition has own price range
-            //Clerk offers customer determined purch price
-            //Customer has 50% chance to sell
-            //If customer refuses, clerk will add on 10% to purch price
-            //Customer has 75% chance to sell
-            //If customer accepts, item is added to inv, update register
-            //If customer denies, do nothing.
+        for (int i = 0; i < sellCustomers.size(); i++)
+        {
+            // Get the item from the selling customer
+            Item sellingItem = sellCustomers.get(i).get_item();
+
+            //have clerk observe item setting its condition and isNew. Return random purch price based on condition set
+            double purchPrice = evaluate_item(sellingItem);
+//            //Clerk offers customer determined purch price
+//            //Customer has 50% chance to sell
+//            //50% chance to sell at first price offered
+            Boolean sellAtFiftyPercent = sellCustomers.get(i).haggle_roll(50);
+//
+            if (sellAtFiftyPercent) {
+                reg.set_amount(reg.get_amount() - purchPrice); //Subtract amount from register
+                System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice);
+                sellingItem.set_purch_price(purchPrice); //Set the purchase price of item
+                get_store().add_to_inventory(sellingItem); //Add to inventory
+            }
+            //If fails, offer 10% increase
+            else {
+                purchPrice *= 1.1;
+                //75% chance to accept
+                Boolean sellAtSeventyFivePercent = sellCustomers.get(i).haggle_roll(75);
+                if (sellAtSeventyFivePercent) {
+                    reg.set_amount(reg.get_amount() - purchPrice); //Subtract amt from register
+                    sellingItem.set_purch_price(purchPrice); //Set the purchase price of item
+                    System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " after a 10% offer increase.");
+                    get_store().add_to_inventory(sellingItem); //Add new item to inventory
+                }
+            }
+
+            System.out.println(get_name() + " tried buying a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " but customer refused.");
+        }
+    }
+
+    private double evaluate_item(Item item){
+        Random rand = new Random(); //Too many new randoms
+        Condition cond = Condition.randomCondition(); //Get a random condition for item
+        item.set_condition(cond); //Set the items condition
+        item.set_is_new(rand.nextBoolean()); //Set the items isNew to random
+        return calculate_condition_price(cond); //Return random price based on items condition
+    }
+
+    private double calculate_condition_price(Condition cond){
+        Random rand = new Random();
+        switch(cond.get_condition().toLowerCase()){ //Based on the string representation of condition
+            case("excellent"):
+                return rand.nextInt(11) + 40; //rand number from 40-50
+            case("very good"):
+                return rand.nextInt(11) + 30;//rand number from 30-40
+            case("good"):
+                return rand.nextInt(11) + 20;//rand number from 20-30
+            case("fair"):
+                return rand.nextInt(11) + 10;//rand number from 10-20
+            case("poor"):
+                return rand.nextInt(10) + 1; //rand number from 1-10
+            default:
+                throw new IllegalArgumentException("Invalid condition type passed to generate_price" + cond.get_condition());
+        }
     }
 
     public void clean_store(){ //The size of this function needs to be reduced!
