@@ -175,41 +175,60 @@ public class Clerk extends Employee{
         {
             // Get the item from the selling customer
             Item sellingItem = sellCustomers.get(i).get_item();
-            System.out.println("SELLING CUSTOMER ITEM: " + sellingItem.toString());
-//            //have clerk observe item and determine purchase price, new or used, condition
-//
-//                //Purchase price is based on condition, each level of condition has own price range
+
+            //have clerk observe item setting its condition and isNew. Return random purch price based on condition set
+            double purchPrice = evaluate_item(sellingItem);
 //            //Clerk offers customer determined purch price
 //            //Customer has 50% chance to sell
-//            //50% chance to pay full price
+//            //50% chance to sell at first price offered
             Boolean sellAtFiftyPercent = sellCustomers.get(i).haggle_roll(50);
 //
             if (sellAtFiftyPercent) {
-                reg.set_amount(reg.get_amount() + sellingItem.get_sale_price());
-//
-                System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + sellingItem.get_sale_price());
-//
-                get_store().add_to_inventory(sellingItem);
+                reg.set_amount(reg.get_amount() - purchPrice); //Subtract amount from register
+                System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice);
+                sellingItem.set_purch_price(purchPrice); //Set the purchase price of item
+                get_store().add_to_inventory(sellingItem); //Add to inventory
             }
-            //If fails, offer 10% discount
+            //If fails, offer 10% increase
             else {
-                sellingItem.set_list_price(1.1 * sellingItem.get_list_price());
-
+                purchPrice *= 1.1;
                 //75% chance to accept
                 Boolean sellAtSeventyFivePercent = sellCustomers.get(i).haggle_roll(75);
                 if (sellAtSeventyFivePercent) {
-                    reg.set_amount(reg.get_amount() + sellingItem.get_sale_price());
-
-                    System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + sellingItem.get_sale_price() + " after a 10% offer increase.");
-
-                    get_store().add_to_inventory(sellingItem);
-                    sellCustomers.remove(i);
+                    reg.set_amount(reg.get_amount() - purchPrice); //Subtract amt from register
+                    sellingItem.set_purch_price(purchPrice); //Set the purchase price of item
+                    System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " after a 10% offer increase.");
+                    get_store().add_to_inventory(sellingItem); //Add new item to inventory
                 }
             }
-//            //If customer refuses, clerk will add on 10% to purch price
-//            //Customer has 75% chance to sell
-//            //If customer accepts, item is added to inv, update register
-//            //If customer denies, do nothing.
+
+            System.out.println(get_name() + " tried buying a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " but customer refused.");
+        }
+    }
+
+    private double evaluate_item(Item item){
+        Random rand = new Random(); //Too many new randoms
+        Condition cond = Condition.randomCondition(); //Get a random condition for item
+        item.set_condition(cond); //Set the items condition
+        item.set_is_new(rand.nextBoolean()); //Set the items isNew to random
+        return calculate_condition_price(cond); //Return random price based on items condition
+    }
+
+    private double calculate_condition_price(Condition cond){
+        Random rand = new Random();
+        switch(cond.get_condition().toLowerCase()){
+            case("excellent"):
+                return rand.nextInt(11) + 40; //rand number from 40-50
+            case("very good"):
+                return rand.nextInt(11) + 30;//rand number from 30-40
+            case("good"):
+                return rand.nextInt(11) + 20;//rand number from 20-30
+            case("fair"):
+                return rand.nextInt(11) + 10;//rand number from 10-20
+            case("poor"):
+                return rand.nextInt(10) + 1; //rand number from 1-10
+            default:
+                throw new IllegalArgumentException("Invalid condition type passed to generate_price" + cond.get_condition());
         }
     }
 
