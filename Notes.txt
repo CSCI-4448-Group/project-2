@@ -1,0 +1,23 @@
+we will need an abstract method in Item that can produce a pure string representation of the items type so a customer can come in asking for a "CD" as a string. public String to_type_string_rep();    or use java reflection
+
+orderedItems_ has to be a <Item,Int> map from item to num days until arrival or set it to calendar day its supposed to arrive 
+
+ordereditems_ will be <int,List<Item>> map from calendar date to list of itemi.e. from day to list of items that arrive on that day
+
+object.getClass.getName/getCanonicalName
+
+
+
+-----------------------------------------------------------
+Damage percentage fxn
+
+damage item fxn
+
+static map of clerk to damage chance in clerk class
+
+change conditions to have a static set of valid conditions, and then in each big if branch we can just check if its in the set of valid
+
+Implement enumerated conditions
+
+should have isValidCondition fxn, whose only job is to check the conditon 
+

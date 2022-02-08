@@ -1,0 +1,19 @@
+def clean_store():
+	item = random.choose_item(inventory.items)
+	if random_chance_damage_item():
+		item.decrement_condition()
+	if item.condition == condition.broken:
+		inventory.remove_item(item)
+
+def do_inventory():
+	for Item in Inventory Tally:
+		if we have no more of that item type
+			place_an_order(itemType)
+
+def place_an_order(itemType):
+	items_list = generate_items(type,numItems)
+	for_each item in item_list:
+		store.addOrderedItem(item, order_arrival_date(currentDay))
+
+def order_arrival_date(date = currentDate):
+	return currentDate + rand % 3 + 1 

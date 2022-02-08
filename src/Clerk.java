@@ -216,7 +216,7 @@ public class Clerk extends Employee{
 
     private double calculate_condition_price(Condition cond){
         Random rand = new Random();
-        switch(cond.get_condition().toLowerCase()){
+        switch(cond.get_condition().toLowerCase()){ //Based on the string representation of condition
             case("excellent"):
                 return rand.nextInt(11) + 40; //rand number from 40-50
             case("very good"):
