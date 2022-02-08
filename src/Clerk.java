@@ -200,9 +200,10 @@ public class Clerk extends Employee{
                     System.out.println(get_name() + " bought a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " after a 10% offer increase.");
                     get_store().add_to_inventory(sellingItem); //Add new item to inventory
                 }
+                else {
+                    System.out.println(get_name() + " tried buying a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " but customer refused.");
+                }
             }
-
-            System.out.println(get_name() + " tried buying a " + sellingItem.get_condition().get_condition() + " condition " + sellingItem.get_is_new() + " " + sellingItem.get_name() + " from " + sellCustomers.get(i).get_name() + " for " + purchPrice + " but customer refused.");
         }
     }
 
