@@ -20,6 +20,9 @@ abstract public class Item{
         condition_ = condition;
         salePrice=salePrice_;
     }
+
+////// Encapsulation: Here we see that the attributes of an Item are private, and we have public ways of accessing and modifiying that data. //////
+
     public void set_name(String name){name_ = name;}
     public void set_purch_price(double price){purchasePrice_ = price;}
     public void set_list_price(double price){listPrice_ = price;}
@@ -37,6 +40,7 @@ abstract public class Item{
     public Condition get_condition(){return condition_;}
     public double get_sale_price(){return salePrice_;}
     public int get_day_sold(){return daySold_;}
+    public String get_new_or_used() {if (new_ == true) {return "new";} else {return "used";}}
 
     //Builds an item of type passed if there is template available in itemBuilder, throws exception if invalid type
     public static Item generate_item(String type) throws Exception {

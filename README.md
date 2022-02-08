@@ -15,4 +15,12 @@ Compile and Run using:
 3. `cd bin/`
 4. `java main_class`
 
+Our examples of the 6 OO Principles can be found here:
+1. Inheritance: See the Music.java file, line 18.
+2. Polymorphism: See the Accessories.java file, line 17
+3. Abstraction: See the Accessories.java file, line 18
+4. Encapsulation: See the Item.java file, line 24
+5. Cohesion: See the Person.java file, line 10
+6. Identity:
+
 Add other assumptions here if necessary.

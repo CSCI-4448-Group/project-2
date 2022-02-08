@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public abstract class Clothing extends Item
 {
     private String brand_;
