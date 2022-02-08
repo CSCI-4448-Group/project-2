@@ -117,13 +117,13 @@ public class Clerk extends Employee{
         //Generate selling customers With random item
         ArrayList<sellingCustomer> sellCustomers = generateSellingCustomers();
 
-        //buying customer:
+//        //buying customer:
         for (int i = 0; i < buyCustomers.size(); i++) {
-            //generate a type of item desired
+//            //generate a type of item desired
             String buyType = buyCustomers.get(i).get_wanted_type();
-            //Check inv map for type of item
+//            //Check inv map for type of item
             ArrayList<Item> potentialItems = inv.get_items_of_type(buyType);
-            //If none exist, customer leaves
+//            //If none exist, customer leaves
             if (potentialItems.size() == 0) {
                 System.out.println(buyCustomers.get(i).get_name() + " wanted to buy a " + buyType + " but none were in inventory, so they left.");
                 buyCustomers.remove(i);
