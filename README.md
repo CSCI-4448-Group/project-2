@@ -4,24 +4,15 @@
 
 Simulation of daily tasks at your Friendly Neighborhood Music Store
 
-Java JDK: 13.0.10
+Java JDK Version: 13.0.10
 
 Assume that random products are clones of the original products, with modified sale price. Only randomized numerical values in the updated item.
 
-Compile using:
+Compile and Run using:
 
-On Mac:
-javac -d bin src/*.java
-
-On windows:
-SAME???
-
-then cd in to bin folder and run:
-
-On mac:
-java main_class
-
-on Windows:
-SAME???
+1. `cd project-2/` or navigate to project root directory
+2. `javac -d bin src/*.java`
+3. `cd bin/`
+4. `java main_class`
 
 Add other assumptions here if necessary.
