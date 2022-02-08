@@ -8,6 +8,11 @@ public class Clerk extends Employee{
         super(name,s);
     }
 
+    public int getRandomNumber(int min, int max) //https://www.baeldung.com/java-generating-random-numbers-in-range
+    {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
     //Set all items arriving today to have currDay arrival date, add all items to inventory
     private void process_incoming_items(int currDay){
         Store s = get_store();
@@ -73,21 +78,97 @@ public class Clerk extends Employee{
         return items;
     }
 
-    public void open_store(){
+    private ArrayList<buyingCustomer> generateBuyingCustomers(){
+        Random rand = new Random();
+        ArrayList<buyingCustomer> buyCustomers = new ArrayList<buyingCustomer>();
+
+        int randBuyers = getRandomNumber(4, 10);
+
+        for (int i = 1; i < randBuyers + 1; i++)
+        {
+            buyCustomers.add(new buyingCustomer("Buying Customer " + i));
+        }
+        return buyCustomers;
+    }
+
+    private ArrayList<sellingCustomer> generateSellingCustomers() throws Exception{
+        ArrayList<sellingCustomer> sellCustomers = new ArrayList<sellingCustomer>();
+
+        int randSellers = getRandomNumber(1, 4);
+
+        for (int i = 1; i < randSellers; i++)
+        {
+            sellCustomers.add(new sellingCustomer("Selling Customer " + i));
+        }
+        return sellCustomers;
+    }
+
+    public void open_store() throws Exception{
+        System.out.println(get_name() + " opened the FNMS for business.");
+
+        // Get the inventory, soldItems, cash register of the store to modify
+        Inventory inv = get_store().get_inventory();
+        ArrayList<Item> soldItems = get_store().get_sold_itens();
+        CashRegister reg = get_store().get_register();
+
         //Generate buying customers
-        //Generate selling customers
-            //With random item
+        ArrayList<buyingCustomer> buyCustomers = generateBuyingCustomers();
+
+        //Generate selling customers With random item
+        ArrayList<sellingCustomer> sellCustomers = generateSellingCustomers();
+
         //buying customer:
+        for (int i = 0; i < buyCustomers.size(); i++) {
             //generate a type of item desired
+            String buyType = buyCustomers.get(i).get_wanted_type();
             //Check inv map for type of item
+            ArrayList<Item> potentialItems = inv.get_items_of_type(buyType);
             //If none exist, customer leaves
+            if (potentialItems.size() == 0) {
+                System.out.println(buyCustomers.get(i).get_name() + " wanted to buy a " + buyType + " but none were in inventory, so they left.");
+                buyCustomers.remove(i);
+            }
             //If exist:
+            else {
+                // Just get the first item of the type. Could change this later
+                Item toBuyItem = potentialItems.get(0);
+
                 //50% chance to pay full price
+                Boolean buyAtFiftyPercent = buyCustomers.get(i).haggle_roll(50);
+
+                if (buyAtFiftyPercent) {
+                    // Remove the bought item from inventory, set daySold and salePrice, update cash register with sale price, move item to soldItems, remove the customer
+                    toBuyItem.set_day_sold(get_store().get_calendar().get_current_day());
+                    toBuyItem.set_sale_price(toBuyItem.get_list_price());
+                    reg.set_amount(reg.get_amount() + toBuyItem.get_sale_price());
+
+                    System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for " + toBuyItem.get_sale_price());
+
+                    get_store().remove_from_inventory(toBuyItem);
+                    get_store().add_to_sold(toBuyItem);
+                    buyCustomers.remove(i);
+                }
                 //If fails, offer 10% discount
+                else {
+                    toBuyItem.set_list_price(0.90 * toBuyItem.get_list_price());
+
                     //75% chance to accept
-            //If sold:
-                //move from inv to sold items, updating day sold and sale price
-            //Update cash register with money gained
+                    Boolean buyAtSeventyFivePercent = buyCustomers.get(i).haggle_roll(75);
+                    if (buyAtSeventyFivePercent) {
+                        // Remove the bought item from inventory, set daySold and salePrice, update cash register with sale price, move item to soldItems, remove the customer
+                        toBuyItem.set_day_sold(get_store().get_calendar().get_current_day());
+                        toBuyItem.set_sale_price(toBuyItem.get_list_price());
+                        reg.set_amount(reg.get_amount() + toBuyItem.get_sale_price());
+
+                        System.out.println(get_name() + " sold a " + buyType + " to " + buyCustomers.get(i).get_name() + " for " + toBuyItem.get_sale_price() + " after a 10% discount.");
+
+                        get_store().remove_from_inventory(toBuyItem);
+                        get_store().add_to_sold(toBuyItem);
+                        buyCustomers.remove(i);
+                    }
+                }
+            }
+        }
         //Selling customer:
             //have clerk observe item and determine purchase price, new or used, condition
                 //Purchase price is based on condition, each level of condition has own price range

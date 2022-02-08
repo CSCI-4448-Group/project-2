@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
-public class sellingCustomer extends Person {
+public class sellingCustomer extends Customer {
 
     private Item sellingItem_;
 
     // Initialize Selling Customer
-    public sellingCustomer (String name, Item item) throws Exception {
+    public sellingCustomer (String name) throws Exception {
         super(name);
         initializeSellingCustomer();
     }
