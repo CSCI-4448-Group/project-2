@@ -74,13 +74,17 @@ public class Clerk extends Employee{
             total_spent_on_order += item.get_purch_price();
         }
         int arrivalDay = s.get_calendar().get_current_day() + rand.nextInt(3) + 1; //Generate random arrival day
+        if ((arrivalDay) % 7 == 0) {
+            arrivalDay++;
+        }
+
         if(s.get_ordered().containsKey(arrivalDay)){ //If there is already an entry for that arrival day
             s.get_ordered().get(arrivalDay).addAll(items); //Add to items arriving that day
         }
         else{
-            s.get_ordered().put(s.get_calendar().get_current_day() + rand.nextInt(3) + 1 ,items); //map the ordered items from (day Arriving) -> (the items created)
+            s.get_ordered().put(arrivalDay, items); //map the ordered items from (day Arriving) -> (the items created)
         }
-        System.out.println(get_name() + " spent $" + Double.toString(total_spent_on_order) + " to place an order for 3 " + type + ".");
+        System.out.println(get_name() + " spent $" + Double.toString(total_spent_on_order) + " to place an order for 3 " + type + ", arriving on day " + Integer.toString(arrivalDay) + ".");
     }
 
     //Generate numItems items of type provided, return generated ArrayList

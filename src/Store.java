@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+
 public class Store {
     private Inventory inventory_; // Inventory, ////// Identity: Inventory is a mapping between subclass type to items and is different than other objects in the application //////
     private ArrayList<Item> soldItems_; // soldItems list
@@ -102,7 +104,7 @@ public class Store {
     public void initializeSoldItems() {
         soldItems_ = new ArrayList<Item>();
     }
-
+    
     // Add item to inventory
     public void add_to_inventory(Item item) {
         inventory_.put_item((item));
@@ -171,6 +173,44 @@ public class Store {
             }
         }
         return clerks;
+    }
+
+    public Clerk get_clerk_of_the_day() {
+        Random rand = new Random();
+        int rand_num = rand.nextInt(2);
+
+        boolean clerk_available = true;
+
+        Clerk current_clerk = new Clerk("", this);
+        Clerk clerk1 = get_clerks().get(0);
+        Clerk clerk2 = get_clerks().get(1);
+
+        if (rand_num == 0) {
+            if (clerk1.get_days_worked() < 3) {
+                current_clerk = clerk1;
+                clerk2.set_days_worked(0);
+            } else if (clerk2.get_days_worked() < 3) {
+                current_clerk = clerk2; 
+                clerk1.set_days_worked(0);
+            } else {
+                clerk_available = false;
+            }
+        } else {
+            if (clerk2.get_days_worked() < 3) {
+                current_clerk = clerk2;
+                clerk1.set_days_worked(0);
+            } else if (clerk1.get_days_worked() < 3) {
+                current_clerk = clerk1;
+                clerk2.set_days_worked(0);
+            } else {
+                clerk_available = false;
+            }
+        }
+        if (clerk_available) {
+            return current_clerk;
+        } 
+
+        return null;
     }
 
     public CashRegister get_register() {
