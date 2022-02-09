@@ -2,18 +2,9 @@ import java.util.Random;
 import java.util.ArrayList;
 class main_class {
 
-    public static void begin_day(Store fnms, Clerk clerk1, Clerk clerk2) throws Exception
+    public static void begin_day(Store fnms, Clerk current_clerk) throws Exception
     {
-        // Choose a random number (either 0 or 1) and assign the respective clerk to work for that day.
-        Random rand = new Random();
-        int rand_num = rand.nextInt(2);
-
-        Clerk current_clerk = new Clerk("", fnms);
-        if (rand_num == 0) {
-            current_clerk = clerk1; // Arguments need to be set, these are wrong
-        } else {
-            current_clerk = clerk2; // Arguments need to be set, these are wrong
-        }
+        
         // Clerk arrives at store
         current_clerk.arrive_at_store();
 
@@ -92,10 +83,61 @@ class main_class {
     public static void runFnmsSimulation(Store FNMS, Clerk clerk1, Clerk clerk2) throws Exception {
         // Main program loop
         // Run loop for 30 days, calling begin_day each time, and print out a delineator between each day.
+
+        // Choose a random number (either 0 or 1) and assign the respective clerk to work for that day.
+
         for (int i = 0; i < 30; i ++)
         {
+            Random rand = new Random();
+            int rand_num = rand.nextInt(2);
+
+            boolean clerk_available = true;
+
+            Clerk current_clerk = new Clerk("", FNMS);
+            // if (rand_num == 0 && clerk1.get_days_worked() <= 3) {
+            //     current_clerk = clerk1; // Arguments need to be set, these are wrong
+            //     clerk1.incr_days_worked();
+            // } else if (clerk2.get_days_worked() <= 3) {
+            //     current_clerk = clerk2; // Arguments need to be set, these are wrong
+            //     clerk2.incr_days_worked();
+            // } else if (clerk1.get_days_worked() <= 3) {
+            //     current_clerk = clerk1; // Arguments need to be set, these are wrong
+            //     clerk1.incr_days_worked();
+            // } else {
+            //     clerk_available = false;
+            // }
+
+            if (rand_num == 0) {
+                if (clerk1.get_days_worked() < 3) {
+                    current_clerk = clerk1;
+                } else if (clerk2.get_days_worked() < 3) {
+                    current_clerk = clerk2; 
+                } else {
+                    clerk_available = false;
+                }
+            } else {
+                if (clerk2.get_days_worked() < 3) {
+                    current_clerk = clerk2;
+                } else if (clerk1.get_days_worked() < 3) {
+                    current_clerk = clerk1; 
+                } else {
+                    clerk_available = false;
+                }
+            }
+
             System.out.println("===========================================");
-            begin_day(FNMS, clerk1, clerk2);
+            if (clerk_available) {
+                begin_day(FNMS, current_clerk);
+            } else {
+                System.out.println("There was not a clerk available to work on day " + Integer.toString(i + 1));
+                FNMS.get_calendar().incr_current_day();
+            }
+
+            if ((i+1) % 7 == 0) {
+                clerk1.set_days_worked(0);
+                clerk2.set_days_worked(0);
+            }
+            
             System.out.println("===========================================");
             System.out.println("\n");
         }
