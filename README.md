@@ -21,6 +21,6 @@ Our examples of the 6 OO Principles can be found here:
 3. Abstraction: See the Accessories.java file, line 18
 4. Encapsulation: See the Item.java file, line 24
 5. Cohesion: See the Person.java file, line 10
-6. Identity:
+6. Identity: See the Store.java file, line 4
 
 Add other assumptions here if necessary.
