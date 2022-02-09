@@ -66,7 +66,13 @@ public class Clerk extends Employee{
         Random rand = new Random();
         Store s = get_store();
         ArrayList<Item> items = generate_items(type.toLowerCase(), 3); //Generate 3 of the type of items asked for
-        s.get_ordered().put(s.get_calendar().get_current_day() + rand.nextInt(3) + 1 ,items); //map the ordered items from (day Arriving) -> (the items created)
+        int arrivalDay = s.get_calendar().get_current_day() + rand.nextInt(3) + 1; //Generate random arrival day
+        if(s.get_ordered().containsKey(arrivalDay)){ //If there is already an entry for that arrival day
+            s.get_ordered().get(arrivalDay).addAll(items); //Add to items arriving that day
+        }
+        else{
+            s.get_ordered().put(s.get_calendar().get_current_day() + rand.nextInt(3) + 1 ,items); //map the ordered items from (day Arriving) -> (the items created)
+        }
         System.out.println(get_name() + " placed an order for 3 " + type);
     }
 
