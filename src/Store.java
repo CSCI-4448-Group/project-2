@@ -11,7 +11,6 @@ public class Store {
     private ArrayList<Customer> sellingCustomers_; // SellingCustomers list
     private CashRegister register_; // Cash register
     private Calendar calendar_; // Calendar
-    private ArrayList<Integer> daysAddedToInventory_;
 
     public Store() {
         initializeInventory();
@@ -20,7 +19,6 @@ public class Store {
         initializeOrdered();
         initializeRegister();
         initializeSoldItems();
-        initializeDaysAddedToInventory();
     } // Init the store with various initialize methods
 
     public void initializeInventory() {
@@ -106,19 +104,7 @@ public class Store {
     public void initializeSoldItems() {
         soldItems_ = new ArrayList<Item>();
     }
-
-    public void initializeDaysAddedToInventory() {
-        daysAddedToInventory_ = new ArrayList<Integer>();
-    }
-
-    public ArrayList<Integer> get_days_added_to_inventory() {
-        return daysAddedToInventory_;
-    }
-
-    public void remove_day_from_days_added_to_inventory(int day) {  
-        daysAddedToInventory_.remove(daysAddedToInventory_.indexOf(day));
-    }
-
+    
     // Add item to inventory
     public void add_to_inventory(Item item) {
         inventory_.put_item((item));
