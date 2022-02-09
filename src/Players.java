@@ -1,5 +1,7 @@
 public abstract class Players extends Item {
-    private String brand_;
+    // Players are a subclass of item
+
+    private String brand_; // Each player has a brand
 
     Players(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
@@ -7,11 +9,13 @@ public abstract class Players extends Item {
         brand_ = brand;
     }
 
+    // Getters and setters
     public String get_brand() {return brand_;}
 
     public void set_brand(String newBrand) {brand_ = newBrand;}
 }
 
+// CD_Player, RecordPlayer, MP3Player extend Players
 class CD_Player extends Players
 {
     CD_Player(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)

@@ -1,7 +1,7 @@
 public class CashRegister {
-    private double amount_;
-    private int num_sales_transactions;
-    private double bank_withdrawals;
+    private double amount_; // Cash Register Amount
+    private int num_sales_transactions; // Number of transactions we do
+    private double bank_withdrawals; // Bank withdrawal amount
 
     public CashRegister() {
         amount_ = 0;
@@ -9,6 +9,7 @@ public class CashRegister {
         bank_withdrawals = 0;
     }
 
+    // Getters and Setters for data
     protected double get_amount() {return amount_;}
     protected int get_num_sales_transactions() {return num_sales_transactions;}
     protected double get_bank_withdrawals() {return bank_withdrawals;}

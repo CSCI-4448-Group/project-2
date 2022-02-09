@@ -1,5 +1,7 @@
 public abstract class Music extends Item{
-    private String band_;
+    // Music extends Item
+
+    private String band_; // Each music has a band and album
     private String album_;
 
     Music(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String band, String album)
@@ -8,6 +10,8 @@ public abstract class Music extends Item{
         band_ = band;
         album_ = album;
     }
+
+    // Getters and Setters
     public void set_band(String band){band_ = band;}
     public void set_album(String album){album_ = album;}
 
@@ -17,6 +21,7 @@ public abstract class Music extends Item{
 
 ////// Inheritance: the classes extend the Music class, and are able to use its methods //////
 
+// CD, Vinyl, PaperScore extend music
 class CD extends Music{
     CD(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String band, String album)
     {

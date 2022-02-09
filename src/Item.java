@@ -197,7 +197,7 @@ abstract public class Item{
                     -1,new Condition("good"),0,name, keys[rand.nextInt(keys.length)]);
         });
 
-
+        // All of the above are potential random items to generate from
 
 
 

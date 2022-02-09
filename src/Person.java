@@ -1,8 +1,10 @@
 abstract class Person {
+    // Person is an abstract class with only a name
     private String name_;
 
     public Person(String name) {name_ = name;}
 
+    // Getters and setters
     public void set_name(String name) {name_ = name;}
     public String get_name() {return name_;}
 }

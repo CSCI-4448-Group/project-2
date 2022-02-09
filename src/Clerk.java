@@ -265,6 +265,7 @@ public class Clerk extends Employee{
         System.out.println(name + " finished cleaning the store.");
     }
 
+    // Pack up the store for the day. Increase days worked and increment current day. Announce that the store is closed
     public void leave_store(){
         get_store().get_calendar().incr_current_day();
         incr_days_worked();

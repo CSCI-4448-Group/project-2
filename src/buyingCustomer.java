@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class buyingCustomer extends Customer {
 
-    private String wantedType_;
+    private String wantedType_; // Customer wants to buy an item of certain type
 
      public buyingCustomer(String name) {
          super(name);

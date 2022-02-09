@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Store {
-    private Inventory inventory_;
-    private ArrayList<Item> soldItems_;
+    private Inventory inventory_; // Inventory
+    private ArrayList<Item> soldItems_; // soldItems list
     private HashMap<Integer, ArrayList<Item>> orderedItems_; //map from (arrival day) -> (list of items arriving)
-    private ArrayList<Employee> employees_;
-    private ArrayList<Customer> buyingCustomers_;
-    private ArrayList<Customer> sellingCustomers_;
-    private CashRegister register_;
-    private Calendar calendar_;
+    private ArrayList<Employee> employees_; // Employees list
+    private ArrayList<Customer> buyingCustomers_; // BuyingCustomers list
+    private ArrayList<Customer> sellingCustomers_; // SellingCustomers list
+    private CashRegister register_; // Cash register
+    private Calendar calendar_; // Calendar
 
     public Store() {
         initializeInventory();
@@ -17,7 +17,7 @@ public class Store {
         initializeOrdered();
         initializeRegister();
         initializeSoldItems();
-    }
+    } // Init the store with various initialize methods
 
     public void initializeInventory() {
         inventory_ = new Inventory();
@@ -74,52 +74,64 @@ public class Store {
         System.out.println("");
     }
 
+    // init employees with Shaggy and Velma
     public void initializeEmployees() {
         employees_ = new ArrayList<Employee>();
         employees_.add(new Clerk("Shaggy",this));
         employees_.add(new Clerk("Velma", this));
     }
 
+    // Init calendar object
     public void initializeCalendar() {
         calendar_ = new Calendar();
     }
 
+    // Init ordered items hashmap
     public void initializeOrdered() {
         orderedItems_ = new HashMap<Integer, ArrayList<Item>>();
     }
 
+    // Init cash register
     public void initializeRegister() {
         register_ = new CashRegister();
     }
 
+    // Init sold items list
     public void initializeSoldItems() {
         soldItems_ = new ArrayList<Item>();
     }
 
+    // Add item to inventory
     public void add_to_inventory(Item item) {
         inventory_.put_item((item));
     }
 
+    // Remove item from inventory
     public void remove_from_inventory(Item item) {
         inventory_.remove_item(item);
     }
 
+    // Add item to sold list
     public void add_to_sold(Item item) {
         soldItems_.add(item);
     }
 
+    // Remove item to sold list
     public void remove_from_sold(Item item) {
         soldItems_.remove(item);
-    } //Idk if we will actually ever need this
+    }
 
+    // Add item to ordered list
     public void add_to_ordered(Integer day, ArrayList<Item> items) {
         orderedItems_.put(day,items);
     }
 
+    // Remove item to ordered list
     public void remove_from_ordered(Item item) {
         orderedItems_.remove(item);
     }
 
+    // Getters and Setters
     public void set_employees(ArrayList<Employee> employees) {
         employees_ = employees;
     }
@@ -148,6 +160,7 @@ public class Store {
         return employees_;
     }
 
+    // Get clerks loops through employees/clerks and adds them to ArrayList of clerks
     public ArrayList<Clerk> get_clerks() {
         ArrayList<Clerk> clerks = new ArrayList<Clerk>();
         for(Employee emp : employees_){

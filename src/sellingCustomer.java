@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class sellingCustomer extends Customer {
 
-    private Item sellingItem_;
+    private Item sellingItem_; // Customer wants to sell an item
 
     // Initialize Selling Customer
     public sellingCustomer (String name) throws Exception {

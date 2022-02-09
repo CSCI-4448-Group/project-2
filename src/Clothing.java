@@ -1,6 +1,6 @@
-public abstract class Clothing extends Item
+public abstract class Clothing extends Item // Clothing extends abstract class Item
 {
-    private String brand_;
+    private String brand_; // Each clothing has a brand
 
     Clothing(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
@@ -8,14 +8,15 @@ public abstract class Clothing extends Item
         brand_ = brand;
     }
 
+    // Getters and setters
     public String get_brand() {return brand_;}
 
     public void set_brand(String newBrand) {brand_ = newBrand;}
 }
 
-class Hat extends Clothing
+class Hat extends Clothing // Hat is a subclass of clothing
 {
-    private int hatSize_;
+    private int hatSize_; // Hat Size is the attribute of hat
 
     Hat(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, int hatSize)
     {
@@ -23,6 +24,7 @@ class Hat extends Clothing
         hatSize_ = hatSize;
     }
 
+    // Getters and setters
     public int get_hat_size() {return hatSize_;}
 
     public void set_hat_size(int newHatSize) {hatSize_ = newHatSize;}
@@ -32,20 +34,22 @@ class Hat extends Clothing
     }
 }
 
-class Bandana extends Clothing
+class Bandana extends Clothing // Bandana extends clothing
 {
     Bandana(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
+
+    // Only need toString
     public String toString(){
         return "Bandana: " + get_brand();
     }
 }
 
-class Shirt extends Clothing
+class Shirt extends Clothing // Shirt extends Clothing
 {
-    private int shirtSize_;
+    private int shirtSize_; // Shirt Size is the attribute of hat
 
     Shirt(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand, int shirtSize)
     {
@@ -53,6 +57,7 @@ class Shirt extends Clothing
         shirtSize_ = shirtSize;
     }
 
+    // Getters and Setters
     public int get_shirt_size() {return shirtSize_;}
 
     public void set_shirt_size(int newShirtSize) {shirtSize_ = newShirtSize;}
