@@ -88,48 +88,13 @@ class main_class {
 
         for (int i = 0; i < 30; i ++)
         {
-            Random rand = new Random();
-            int rand_num = rand.nextInt(2);
-
-            boolean clerk_available = true;
-
-            Clerk current_clerk = new Clerk("", FNMS);
-            // if (rand_num == 0 && clerk1.get_days_worked() <= 3) {
-            //     current_clerk = clerk1; // Arguments need to be set, these are wrong
-            //     clerk1.incr_days_worked();
-            // } else if (clerk2.get_days_worked() <= 3) {
-            //     current_clerk = clerk2; // Arguments need to be set, these are wrong
-            //     clerk2.incr_days_worked();
-            // } else if (clerk1.get_days_worked() <= 3) {
-            //     current_clerk = clerk1; // Arguments need to be set, these are wrong
-            //     clerk1.incr_days_worked();
-            // } else {
-            //     clerk_available = false;
-            // }
-
-            if (rand_num == 0) {
-                if (clerk1.get_days_worked() < 3) {
-                    current_clerk = clerk1;
-                } else if (clerk2.get_days_worked() < 3) {
-                    current_clerk = clerk2; 
-                } else {
-                    clerk_available = false;
-                }
-            } else {
-                if (clerk2.get_days_worked() < 3) {
-                    current_clerk = clerk2;
-                } else if (clerk1.get_days_worked() < 3) {
-                    current_clerk = clerk1; 
-                } else {
-                    clerk_available = false;
-                }
-            }
+            Clerk current_clerk = FNMS.get_clerk_of_the_day();
 
             System.out.println("===========================================");
-            if (clerk_available) {
+            if (current_clerk != null && ((i + 1) % 7 != 0)) {
                 begin_day(FNMS, current_clerk);
             } else {
-                System.out.println("There was not a clerk available to work on day " + Integer.toString(i + 1));
+                System.out.println("Day " + Integer.toString(i + 1) + " is a Sunday, so the store did not open.");
                 FNMS.get_calendar().incr_current_day();
             }
 
