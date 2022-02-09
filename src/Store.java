@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Store {
-    private Inventory inventory_; // Inventory
+    private Inventory inventory_; // Inventory, ////// Identity: Inventory is a mapping between subclass type to items and is different than other objects in the application //////
     private ArrayList<Item> soldItems_; // soldItems list
     private HashMap<Integer, ArrayList<Item>> orderedItems_; //map from (arrival day) -> (list of items arriving)
     private ArrayList<Employee> employees_; // Employees list
