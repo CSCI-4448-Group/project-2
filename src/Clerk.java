@@ -50,11 +50,13 @@ public class Clerk extends Employee{
 
     //Scan the current inventory, if we have 0 count of any type of item, order 3 of them
     public void do_inventory() throws Exception{
-        Inventory inv = get_store().get_inventory();
+        Store s = get_store();
+        Inventory inv = s.get_inventory();
         for(Map.Entry<String, ArrayList<Item>> entry : inv.get_mapping().entrySet()){ //For each entry in our inventory map
-            if(entry.getValue().isEmpty()){ //If we have 0 count of any items
+            if(entry.getValue().isEmpty() && !s.search_ordered_item_type(entry.getKey())){ //If we have 0 count of any items in our current inventory && they have not already been ordered
                 place_order(entry.getKey()); //Order that item
             }
+
         }
         System.out.println("The sum of todays inventory is " + inv.get_list_price_sum()); //Display the list price sum of all items in inventory
     }
