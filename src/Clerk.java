@@ -103,6 +103,8 @@ public class Clerk extends Employee{
         return sellCustomers;
     }
 
+    // Ran out of time on open_store, but this could be abstracted by creating a buying/selling behavior interface and removing
+    // the complicated for loops and if statements to not create excess programming logic levels.
     public void open_store() throws Exception{
         System.out.println(get_name() + " opened the FNMS for business.");
 
