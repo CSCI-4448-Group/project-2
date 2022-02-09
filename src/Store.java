@@ -37,7 +37,9 @@ public class Store {
         inventory_.put_item((new RecordPlayer("Logitech RecordPlayer", 20, 40, true, 0, new Condition("very good"), 0, "Logitech")));
         inventory_.put_item((new RecordPlayer("LG RecordPlayer", 20, 40, true, 0, new Condition("fair"), 0, "LG")));
         inventory_.put_item((new RecordPlayer("Sony RecordPlayer", 20, 40, true, 0, new Condition("good"), 0, "Sony")));
-        //Forgot to add MP3Players here!!!!!!
+        inventory_.put_item((new MP3Player("Logitech MP3Player", 20, 40, true, 0, new Condition("very good"), 0, "Logitech")));
+        inventory_.put_item((new MP3Player("LG MP3Player", 20, 40, true, 0, new Condition("fair"), 0, "LG")));
+        inventory_.put_item((new MP3Player("Sony MP3Player", 20, 40, true, 0, new Condition("good"), 0, "Sony")));
         inventory_.put_item((new Guitar("Gibson SG Guitar", 45, 90, true, 0, new Condition("excellent"), 0, "Gibson", true)));
         inventory_.put_item((new Guitar("Fender Stratocaster Guitar", 40, 80, false, 0, new Condition("good"), 0, "Fender", true)));
         inventory_.put_item((new Guitar("Ibanez Guitar", 40, 80, true, 0, new Condition("very good"), 0, "Ibanez", true)));
@@ -186,7 +188,6 @@ public class Store {
                 return true;
             }
         }
-
         return false;
     }
 }
