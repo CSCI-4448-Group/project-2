@@ -15,3 +15,8 @@ What kind of fields should instrument/clothing etc, have? Does it make sense to 
 For now leave them empty, categorization
 Instead of StoreManagement interface, have big container to hold store/employees /calander to allow them to communicate
 No god class plz
+
+
+---------------------------------------------------------
+
+Should I have a generate item method in each second level abstract class (Music, instrument, etc) and then override it in each concrete class?

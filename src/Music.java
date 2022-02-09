@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public abstract class Music extends Item{
     private String band_;
     private String album_;
@@ -17,13 +15,15 @@ public abstract class Music extends Item{
     public String get_album(){return album_;}
 }
 
+////// Inheritance: the classes extend the Music class, and are able to use its methods //////
+
 class CD extends Music{
     CD(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String band, String album)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString(){
-        return "CD: " + get_band() + get_album();
+        return "CD: " + get_band() + " " + get_album();
     }
 }
 
@@ -32,7 +32,7 @@ class Vinyl extends Music {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString() {
-        return "Vinyl: " + get_band() + get_album();
+        return "Vinyl: " + get_band() + " " + get_album();
     }
 }
 
@@ -41,6 +41,6 @@ class PaperScore extends Music {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, band, album);
     }
     public String toString() {
-        return "PaperScore: " + get_band() + get_album();
+        return "PaperScore: " + get_band() + " " + get_album();
     }
 }

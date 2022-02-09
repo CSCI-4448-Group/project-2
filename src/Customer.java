@@ -1,15 +1,13 @@
-public class Customer extends Person {
-
-    private boolean selling_;
-    private Item item_;
-
-    public Customer(String name, boolean selling, Item item) {
+import java.util.Random;
+abstract class Customer extends Person {
+    
+    public Customer(String name) {
         super(name);
-        selling_ = selling;
-        item_ = item;
     }
 
-    public Item get_item() {return item_;}
-    public boolean get_selling() {return selling_;}
-    
+    public boolean haggle_roll(int percentChance){
+        Random rand = new Random();
+        return rand.nextInt(100) < percentChance;
+    }
 }
+

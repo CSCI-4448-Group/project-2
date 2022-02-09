@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Condition{
     private String cond_;
 
@@ -30,5 +31,11 @@ public class Condition{
         else if(cond_ == "good"){cond_ = "fair";}
         else if(cond_ == "very good"){cond_ = "good";}
         else if(cond_ == "excellent"){cond_ = "very good";}
+    }
+
+    public static Condition randomCondition(){
+        Random rand = new Random();
+        String[] conds = {"poor","fair","good","very good", "excellent"};
+        return new Condition(conds[rand.nextInt(conds.length)]);
     }
 }

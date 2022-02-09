@@ -11,6 +11,7 @@ public abstract class Accessories extends Item
     public String get_brand() {return brand_;}
 
     public void set_brand(String newBrand) {brand_ = newBrand;}
+    public abstract String toString();
 }
 
 class PracticeAmp extends Accessories

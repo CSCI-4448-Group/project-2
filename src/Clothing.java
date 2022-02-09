@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public abstract class Clothing extends Item
 {
     private String brand_;
@@ -41,7 +39,7 @@ class Bandana extends Clothing
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
     public String toString(){
-        return "Bandanas: " + get_brand();
+        return "Bandana: " + get_brand();
     }
 }
 

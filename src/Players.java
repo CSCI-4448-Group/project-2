@@ -34,9 +34,9 @@ class RecordPlayer extends Players
     }
 }
 
-class MP3 extends Players
+class MP3Player extends Players
 {
-    MP3(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
+    MP3Player(String name, double purchPrice, double listPrice, boolean isNew, int dayArriv, Condition condition, double salePrice, String brand)
     {
         super(name, purchPrice, listPrice, isNew, dayArriv, condition, salePrice, brand);
     }
